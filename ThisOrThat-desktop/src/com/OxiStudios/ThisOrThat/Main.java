@@ -8,8 +8,8 @@ public class Main {
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = "ThisOrThat";
 		cfg.useGL20 = false;
-		cfg.width = 480;
-		cfg.height = 320;
+		cfg.width = 1080/3;
+		cfg.height = 1920/3;
 		
 		new LwjglApplication(new ThisOrThatGame(), cfg);
 	}

@@ -17,8 +17,6 @@ public class GameScene {
 	float SCREEN_WIDTH  = Gdx.graphics.getWidth();
 	float SCREEN_HEIGHT = Gdx.graphics.getHeight();
 	
-	public boolean isRight;
-	
 	public Timer timer;
 	
 	Stage stage;
@@ -33,6 +31,7 @@ public class GameScene {
 	RandomPhoto randomPhoto;
 	
 	BitmapFont font;
+	float widthForTime;
 	
 	public GameScene() {
 		stage = new Stage();
@@ -46,6 +45,7 @@ public class GameScene {
 		
 		font = new BitmapFont(Gdx.files.internal("data/fonts/ourFont.fnt"), false);
 		font.setColor(Color.BLUE);
+		widthForTime = font.getBounds("Timer: " + timer.gameTimer).width;
 		
 		Gdx.app.log("Screen", "Width: " + SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + SCREEN_HEIGHT);
@@ -63,9 +63,9 @@ public class GameScene {
 		stage.draw();
 		
 		spriteBatch.begin();
-		font.draw(spriteBatch, "Time: " + timer.getTimer(), SCREEN_WIDTH/2,SCREEN_HEIGHT/2);
-		font.draw(spriteBatch, "Score: " + this.gameScore, SCREEN_WIDTH/2, SCREEN_HEIGHT/4);
-		font.draw(spriteBatch, "Total Score: " + totalScore, SCREEN_WIDTH/2, SCREEN_HEIGHT/5);
+		font.draw(spriteBatch, "Time: " + timer.getTimer(), SCREEN_WIDTH - widthForTime, .99f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, "Points: " + this.gameScore, .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, "Total Score: " + totalScore, .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
 		spriteBatch.end();
 		
 
