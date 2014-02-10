@@ -32,7 +32,7 @@ public class loadScreen implements Screen{
 		batch.end();
 		
 		if(isReady) {
-			game.setScreen(new GameScreen());
+			game.setScreen(new MainMenu(game));
 		}
 	}
 

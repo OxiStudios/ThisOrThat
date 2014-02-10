@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat.Game;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -47,13 +48,16 @@ public class Timer {
 			gameTimer -= 10;			
 		}else{
 			gameTimer = 0;
+			if(gameTimer == 0) {
+				
+			}
 		}
 		if(gameScene.gameScore >= 20.1) {
 			gameScene.gameScore -= 2.5;			
 		}else{
 			gameScene.gameScore = 20;
 		}
-		//Gdx.app.log("Timer", "" + gameTimer / 1000 + " Score: " + gameScene.gameScore);
+		Gdx.app.log("Timer", "" + gameTimer / 1000 + " Score: " + gameScene.gameScore);
 	}
 	
 	public double getTimer() {

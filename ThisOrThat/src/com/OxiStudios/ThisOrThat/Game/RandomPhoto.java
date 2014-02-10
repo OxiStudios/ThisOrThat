@@ -12,9 +12,15 @@ public class RandomPhoto {
 		
 	}
 	
-	public void randomPic() {
-		float randomSection = MathUtils.random(10);
-		float randomPhoto   = MathUtils.random(100);
+	public int randomPic(String which_one) {
+		int randomCat = MathUtils.random(9);
+		int randomPhoto   = MathUtils.random(99);
+		
+		if(which_one == "cat") {
+			return randomCat;
+		}else{
+			return randomPhoto;
+		}
 		
 	}
 	
