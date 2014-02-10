@@ -16,6 +16,7 @@ public class ScoreBoardListener extends InputListener{
 	}
 	
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
+		Gdx.app.log("ScoreBoard", "scoreboard button clicked");
 		game.setScreen(new ScoreBoardScreen());
         return true;
 	}

@@ -1,0 +1,26 @@
+
+menu.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+leaderboard
+  rotate: false
+  xy: 1, 403
+  size: 545, 202
+  orig: 545, 202
+  offset: 0, 0
+  index: -1
+stats
+  rotate: false
+  xy: 1, 201
+  size: 544, 200
+  orig: 544, 200
+  offset: 0, 0
+  index: -1
+play
+  rotate: false
+  xy: 1, 1
+  size: 526, 198
+  orig: 526, 198
+  offset: 0, 0
+  index: -1

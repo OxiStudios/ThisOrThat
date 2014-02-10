@@ -15,7 +15,8 @@ public class PlayButtonListener extends InputListener{
 	}
 	
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
-		game.setScreen(new GameScreen());
+		//game.setScreen(new GameScreen());
+		Gdx.app.log("Play", "Play button clicked");
         return true;
 	}
 

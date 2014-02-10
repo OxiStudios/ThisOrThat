@@ -13,16 +13,19 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 
 public class MainMenu implements Screen{
 	
 	TextureAtlas menuButtons;
+	TextureAtlas background_texture;
 	
 	ImageButton play, scoreboard, stats;
 	ImageButtonStyle playStyle, scoreboardStyle, statsStyle;
+	Skin skin;
+	Sprite playSprite, statsSprite, scoreboardSprite;
 	
-	Texture background_texture;
 	Sprite background_sprite;
 	
 	SpriteBatch batch;
@@ -65,19 +68,44 @@ public class MainMenu implements Screen{
 		}
 		
 		if(menuButtons == null) {
-			menuButtons = new TextureAtlas("stand in");
+			menuButtons = new TextureAtlas("data/menu/menu.pack");
+		}
+		
+		if(playSprite == null) {
+			playSprite = menuButtons.createSprite("play");
+			playSprite.setSize(.486f * Gdx.graphics.getWidth(), 0.104166f * Gdx.graphics.getHeight());
+		}
+		
+		if(statsSprite == null) {
+			statsSprite = menuButtons.createSprite("stats");
+			statsSprite.setSize(.486f * Gdx.graphics.getWidth(), 0.104166f * Gdx.graphics.getHeight());
+		}
+		
+		if(scoreboardSprite == null) {
+			scoreboardSprite = menuButtons.createSprite("leaderboard");
+			scoreboardSprite.setSize(.486f * Gdx.graphics.getWidth(), 0.104166f * Gdx.graphics.getHeight());
+		}
+		
+		if(skin == null) {
+			skin = new Skin();
+			skin.add("play", playSprite);
+			skin.add("stats", statsSprite);
+			skin.add("leaderboard", scoreboardSprite);
 		}
 		
 		if(playStyle == null) {
 			playStyle = new ImageButtonStyle();
+			playStyle.imageUp = skin.getDrawable("play");
 		}
 		
 		if(scoreboardStyle == null) {
 			scoreboardStyle = new ImageButtonStyle();
+			scoreboardStyle.imageUp = skin.getDrawable("leaderboard");
 		}
 		
 		if(statsStyle == null) {
 			statsStyle = new ImageButtonStyle();
+			statsStyle.imageUp = skin.getDrawable("stats");
 		}
 		
 		if(play == null) {
@@ -96,26 +124,27 @@ public class MainMenu implements Screen{
 		}
 		
 		if(background_texture == null) {
-			background_texture = new Texture("stand in");
+			background_texture = new TextureAtlas("data/menu/menu_background.pack");
 		}
 		
 		if(background_sprite == null) {
-			background_sprite = new Sprite(background_texture);
+			background_sprite = background_texture.createSprite("background_loading");
 			background_sprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
 		if(stage == null) {
 			stage = new Stage();
+			Gdx.input.setInputProcessor(stage);
 		}
 		
 		if(buttonTable == null) {
 			buttonTable = new Table();
 			buttonTable.setFillParent(true);
-			buttonTable.add(play).center().padTop(Gdx.graphics.getHeight()/4);
+			buttonTable.add(play).center().padTop(Gdx.graphics.getHeight()/1.7f);
 			buttonTable.row();
-			buttonTable.add(scoreboard).center().padTop(Gdx.graphics.getHeight()/6);
+			buttonTable.add(scoreboard).center().padTop(Gdx.graphics.getHeight()/30);
 			buttonTable.row();
-			buttonTable.add(stats).center().padTop(Gdx.graphics.getHeight()/6);
+			buttonTable.add(stats).center().padTop(Gdx.graphics.getHeight()/30);
 			
 			stage.addActor(buttonTable);
 		}
