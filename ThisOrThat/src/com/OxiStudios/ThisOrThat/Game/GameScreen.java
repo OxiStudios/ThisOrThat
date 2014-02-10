@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat.Game;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL10;
@@ -7,6 +8,11 @@ import com.badlogic.gdx.graphics.GL10;
 public class GameScreen implements Screen{
 	
 	GameScene gameScene;
+	private ThisOrThatGame game;
+	
+	public GameScreen(ThisOrThatGame game) {
+		this.game = game;
+	}
 
 	@Override
 	public void render(float delta) {
@@ -27,7 +33,7 @@ public class GameScreen implements Screen{
 	public void show() {
 		// TODO Auto-generated method stub
 		if(gameScene == null) {
-			gameScene = new GameScene();
+			gameScene = new GameScene(game);
 		}
 	}
 

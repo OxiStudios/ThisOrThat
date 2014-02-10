@@ -142,9 +142,9 @@ public class MainMenu implements Screen{
 			buttonTable.setFillParent(true);
 			buttonTable.add(play).center().padTop(Gdx.graphics.getHeight()/1.7f);
 			buttonTable.row();
-			buttonTable.add(scoreboard).center().padTop(Gdx.graphics.getHeight()/30);
+			buttonTable.add(scoreboard).center().padTop(Gdx.graphics.getHeight()/100);
 			buttonTable.row();
-			buttonTable.add(stats).center().padTop(Gdx.graphics.getHeight()/30);
+			buttonTable.add(stats).center().padTop(Gdx.graphics.getHeight()/100);
 			
 			stage.addActor(buttonTable);
 		}

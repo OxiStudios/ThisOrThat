@@ -6,9 +6,11 @@ import com.badlogic.gdx.Screen;
 
 public class ThisOrThatGame extends Game {
 	
+	public int TotalScore;
+	
 	@Override
 	public void create() {
-		
+		TotalScore = 0;
 		setScreen(new loadScreen(this));
 	}
 

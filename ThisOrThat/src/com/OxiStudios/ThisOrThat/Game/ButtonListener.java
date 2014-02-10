@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat.Game;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.InputListener;
@@ -10,11 +11,13 @@ public class ButtonListener extends InputListener{
 	private ImageButton imageButton;
 	private Timer timer;
 	private boolean isCorrect;
-	private GameScene game;
+	private GameScene gameScene;
 	private boolean hasBeenClicked;
+	private ThisOrThatGame game;
 
-	public ButtonListener(GameScene game, ImageButton imageButton, Timer timer, boolean isCorrect) {
+	public ButtonListener(ThisOrThatGame game, GameScene gameScene, ImageButton imageButton, Timer timer, boolean isCorrect) {
 		this.game        = game;
+		this.gameScene   = gameScene;
 		this.imageButton = imageButton;
 		this.timer       = timer;
 		this.isCorrect   = isCorrect;
@@ -24,7 +27,20 @@ public class ButtonListener extends InputListener{
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
          Gdx.app.log("ImageButton", "Button:" + imageButton.getName());
          if(timer.gameTimer > 0 && isCorrect && !hasBeenClicked) {
-        	 game.totalScore += game.gameScore;
+        	 
+        	 //the player got it right!
+        	 
+        	 game.TotalScore += gameScene.gameScore;
+        	 //play ding sound for getting it right
+        	 //dispose last screen's shit
+        	 game.getScreen().dispose();
+        	 //reset the game 
+        	 game.setScreen(new GameScreen(game));
+         }else if(timer.gameTimer > 0 && !isCorrect && !hasBeenClicked) {
+        	 
+        	 //the player got it wrong :(
+        	 
+        	 //stop the game and show screen
          }
          return true;
 	}
