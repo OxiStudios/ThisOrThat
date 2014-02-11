@@ -28,7 +28,7 @@ public class Timer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				while(gameTimer >= 0){
+				while(gameTimer > 0){
 					countDown();
 					try{
 						Thread.sleep(10);

@@ -30,7 +30,7 @@ public class GameScene {
 	Stage stage;
 	
 	ImageButton picture_One, picture_Two;
-	Table mainTable, pictureTableOne, pictureTableTwo, pointTable, wordTable, titleTable;
+	Table mainTable, pictureTableOne, pictureTableTwo;
 	private SpriteBatch spriteBatch;
 	
 	public double gameScore;
@@ -52,7 +52,7 @@ public class GameScene {
 	Dictionary dictionary = new Dictionary();
 	
 	boolean oneIsRight;
-	
+	private boolean readyToRun;
 	private ThisOrThatGame game;
 	
 	public GameScene(ThisOrThatGame game) {
@@ -86,10 +86,11 @@ public class GameScene {
 		pic02_catNum = randomPhoto.randomPic("cat");
 		pic01_num    = randomPhoto.randomPic("pic");
 		pic02_num    = randomPhoto.randomPic("pic");
-		
-		this.makeButtons();
-		this.makeWord();
-		this.makeTables();
+	
+
+		makeButtons();
+		makeWord();
+		makeTables();
 		
 
 		timer.timerThread.start();
@@ -97,19 +98,18 @@ public class GameScene {
 	
 	
 	public void render() {
-		
 
-		stage.draw();
+		
 		
 		spriteBatch.begin();
 		background.draw(spriteBatch);
-		font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - font.getBounds(randomWord).width, SCREEN_HEIGHT/2);
-		font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime, .99f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - font.getBounds(randomWord).width/2, SCREEN_HEIGHT - .20f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime + 4, .975f * SCREEN_HEIGHT);
 		font.draw(spriteBatch, Double.toString(this.gameScore), .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
 		font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
 		spriteBatch.end();
 		
-
+		stage.draw();
 		stage.act();
 		Table.drawDebug(stage);
 		
@@ -119,24 +119,15 @@ public class GameScene {
 		mainTable = new Table();
 		mainTable.setFillParent(true);
 		
-		titleTable      = new Table();
-		wordTable       = new Table();
 		pictureTableOne = new Table();
-		pointTable      = new Table();
 		pictureTableTwo = new Table();
 		
 		pictureTableOne.add(picture_One);
 		pictureTableTwo.add(picture_Two);
-		
-		mainTable.add(titleTable);
+	
+		mainTable.add(pictureTableOne).top().center().padTop(.18f * SCREEN_HEIGHT);
 		mainTable.row();
-		mainTable.add(wordTable).center();
-		mainTable.row();
-		mainTable.add(pictureTableOne);
-		mainTable.row();
-		mainTable.add(pointTable);
-		mainTable.row();
-		mainTable.add(pictureTableTwo);
+		mainTable.add(pictureTableTwo).top().center().padTop(.0848f * SCREEN_HEIGHT);
 		
 		
 		stage.addActor(mainTable);
@@ -239,7 +230,7 @@ public class GameScene {
 		}
 		//get the random word from the array of words
 		//this.randomWord = randomWordArray.get(MathUtils.random(2));
-		this.randomWord = "test";
+		this.randomWord = "test word";
 		
 	}
 
