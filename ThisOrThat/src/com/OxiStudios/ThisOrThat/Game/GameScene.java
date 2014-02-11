@@ -19,8 +19,8 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class GameScene {
 	
-	float SCREEN_WIDTH  = Gdx.graphics.getWidth();
-	float SCREEN_HEIGHT = Gdx.graphics.getHeight();
+	float SCREEN_WIDTH;
+	float SCREEN_HEIGHT;
 	
 	public TextureAtlas backgrounds;
 	public Sprite background;
@@ -58,11 +58,12 @@ public class GameScene {
 	public GameScene(ThisOrThatGame game) {
 		
 		this.game = game;
-		
+		SCREEN_HEIGHT = Gdx.graphics.getHeight();
+		SCREEN_WIDTH  = Gdx.graphics.getWidth();
 		
 		stage = new Stage();
 		backgrounds = new TextureAtlas(Gdx.files.internal("data/backgrounds/backgrounds.pack"));
-		background  = backgrounds.createSprite("bg0" + MathUtils.random(5) + 1);
+		background  = new Sprite(backgrounds.createSprite("bg0" + Integer.toString(MathUtils.random(4) + 1)));
 		background.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		
 		spriteBatch = new SpriteBatch();
@@ -71,11 +72,10 @@ public class GameScene {
 		gameScore = 750.0;
 		
 		timer = new Timer(this);
-		timer.timerThread.start();
 		
 		font = new BitmapFont(Gdx.files.internal("data/fonts/ourFont.fnt"), false);
 		font.setColor(Color.BLUE);
-		widthForTime = font.getBounds("Timer: " + timer.gameTimer).width;
+		widthForTime = font.getBounds(Double.toString(timer.gameTimer)).width;
 		
 		Gdx.app.log("Screen", "Width: " + SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + SCREEN_HEIGHT);
@@ -90,6 +90,9 @@ public class GameScene {
 		this.makeButtons();
 		this.makeWord();
 		this.makeTables();
+		
+
+		timer.timerThread.start();
 	}
 	
 	
@@ -101,9 +104,9 @@ public class GameScene {
 		spriteBatch.begin();
 		background.draw(spriteBatch);
 		font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - font.getBounds(randomWord).width, SCREEN_HEIGHT/2);
-		font.draw(spriteBatch, "Time: " + timer.getTimer(), SCREEN_WIDTH - widthForTime, .99f * SCREEN_HEIGHT);
-		font.draw(spriteBatch, "Points: " + this.gameScore, .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
-		font.draw(spriteBatch, "Total Score: " + game.TotalScore, .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime, .99f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, Double.toString(this.gameScore), .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
+		font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
 		spriteBatch.end();
 		
 
@@ -142,8 +145,8 @@ public class GameScene {
 	public void makeButtons() {
 		
 		// grab two random categories
-		TextureAtlas pic_one_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat" + Integer.toString(pic01_catNum) + ".pack"));
-		TextureAtlas pic_two_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat" + Integer.toString(pic02_catNum) + ".pack"));
+		TextureAtlas pic_one_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat01.pack"));
+		TextureAtlas pic_two_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat01.pack"));
 		
 		//make the styles for the buttons
 		ImageButtonStyle style_1 = new ImageButtonStyle();
@@ -163,8 +166,8 @@ public class GameScene {
 		
 		//make the skin for the buttons
 		Skin skin = new Skin();
-		skin.add("image_1", pic_one_atlas.createSprite(picOne_Name));
-		skin.add("image_2", pic_two_atlas.createSprite(picTwo_Name));
+		skin.add("image_1", pic_one_atlas.createSprite("pic25"));
+		skin.add("image_2", pic_two_atlas.createSprite("pic34"));
 		
 		//link the skins with the styles
 		style_1.imageUp = skin.newDrawable("image_1");
@@ -219,14 +222,15 @@ public class GameScene {
 			//second is correct so we need to get the a random word that matches pic two
 			if(pic02_num < 10) {
 				
-				randomWordArray = dict.get("pic0" + Integer.toString(pic02_num));
+				randomWordArray = dict.get("cat01_" + "pic0" + Integer.toString(pic02_num));
 			}else{
 				
-				randomWordArray = dict.get("pic" + Integer.toString(pic02_num));
+				randomWordArray = dict.get("cat01_" + "pic" + Integer.toString(pic02_num));
 			}
 		}
 		//get the random word from the array of words
-		this.randomWord = randomWordArray.get(MathUtils.random(2));
+		//this.randomWord = randomWordArray.get(MathUtils.random(2));
+		this.randomWord = "test";
 		
 	}
 

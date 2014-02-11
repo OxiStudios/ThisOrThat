@@ -13,8 +13,8 @@ public class RandomPhoto {
 	}
 	
 	public int randomPic(String which_one) {
-		int randomCat = MathUtils.random(9);
-		int randomPhoto   = MathUtils.random(99);
+		int randomCat = 1;
+		int randomPhoto   = MathUtils.random(49);
 		
 		if(which_one == "cat") {
 			return randomCat;
