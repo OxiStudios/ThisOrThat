@@ -5,9 +5,11 @@ import com.OxiStudios.ThisOrThat.Game.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class loadScreen implements Screen{
@@ -16,6 +18,8 @@ public class loadScreen implements Screen{
 	TextureAtlas loadingImage;
 	Sprite loadingSprite;
 	private ThisOrThatGame game;
+	
+	Animation animation;
 	
 	boolean isReady = false;
 	
@@ -51,11 +55,11 @@ public class loadScreen implements Screen{
 		
 		if(loadingImage == null) {
 			
-			loadingImage = new TextureAtlas("data/othergamephotos/loadingScreen.pack");
+			loadingImage = new TextureAtlas("data/loadingscreen/background_loop.pack");
 		}
 		
 		if(loadingSprite == null) {
-			loadingSprite = loadingImage.createSprite("icon_master");
+			loadingSprite = loadingImage.createSprite("background_loop1");
 			loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
@@ -63,14 +67,21 @@ public class loadScreen implements Screen{
 			long startTime = TimeUtils.millis();
 			long currentTime = TimeUtils.millis();
 			long elapseTime = 0;
+			int animationPlace = 1;
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
 				while(elapseTime <= 4000) {
 					elapseTime = currentTime - startTime;
+					if(animationPlace > 5) {
+						animationPlace = 1;
+					}
 					
+					loadingSprite.set(loadingImage.createSprite("background_loop" + Integer.toString(animationPlace)));
+					loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+					animationPlace++;
 					try{
-						Thread.sleep(1000);
+						Thread.sleep(1000/30);
 					}catch(InterruptedException e) {
 						
 					}

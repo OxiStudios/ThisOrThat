@@ -166,8 +166,14 @@ public class GameScene {
 		
 		//make the skin for the buttons
 		Skin skin = new Skin();
-		skin.add("image_1", pic_one_atlas.createSprite("pic25"));
-		skin.add("image_2", pic_two_atlas.createSprite("pic34"));
+		
+		Sprite picOne_sprite = new Sprite(pic_one_atlas.createSprite("pic25"));
+		Sprite picTwo_sprite = new Sprite(pic_two_atlas.createSprite("pic34"));
+		picOne_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		picTwo_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		
+		skin.add("image_1", picOne_sprite);
+		skin.add("image_2", picTwo_sprite);
 		
 		//link the skins with the styles
 		style_1.imageUp = skin.newDrawable("image_1");
@@ -175,7 +181,10 @@ public class GameScene {
 		
 		//make the buttons and link them with the styles
 		picture_One = new ImageButton(style_1);
+		picture_One.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		
 		picture_Two = new ImageButton(style_2);
+		picture_Two.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
 		
 		//testing purposes
 		picture_One.setName("image_1");
