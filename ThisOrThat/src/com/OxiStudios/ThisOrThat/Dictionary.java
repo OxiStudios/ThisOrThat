@@ -58,28 +58,28 @@ public class Dictionary {
 		cat01_pic01.add("Cooked Asparagus");
 
 		cat01_pic02 = new Array<String>();
-		cat01_pic02.add("");
+		cat01_pic02.add("Stew");
 
 		cat01_pic03 = new Array<String>();
 		cat01_pic03.add("Blueberries");
 
 		cat01_pic04 = new Array<String>();
-		cat01_pic04.add("");
+		cat01_pic04.add("Dough");
 
 		cat01_pic05 = new Array<String>();
 		cat01_pic05.add("Loaf of Bread");
 
 		cat01_pic06 = new Array<String>();
-		cat01_pic06.add("");
+		cat01_pic06.add("Ceviche");
 
 		cat01_pic07 = new Array<String>();
 		cat01_pic07.add("Tomatoes");
 
 		cat01_pic08 = new Array<String>();
-		cat01_pic08.add("");
+		cat01_pic08.add("Dim Sum");
 
 		cat01_pic09 = new Array<String>();
-		cat01_pic09.add("");
+		cat01_pic09.add("Spinach");
 
 		cat01_pic10 = new Array<String>();
 		cat01_pic10.add("French Fries");
@@ -88,25 +88,25 @@ public class Dictionary {
 		cat01_pic11.add("Cup of Coffee");
 
 		cat01_pic12 = new Array<String>();
-		cat01_pic12.add("");
+		cat01_pic12.add("Flaxseed");
 
 		cat01_pic13 = new Array<String>();
-		cat01_pic13.add("");
+		cat01_pic13.add("French Fries");
 
 		cat01_pic14 = new Array<String>();
-		cat01_pic14.add("");
+		cat01_pic14.add("Smoothie");
 
 		cat01_pic15 = new Array<String>();
 		cat01_pic15.add("Guacamole");
 
 		cat01_pic16 = new Array<String>();
-		cat01_pic16.add("");
+		cat01_pic16.add("Gyros");
 
 		cat01_pic17 = new Array<String>();
-		cat01_pic17.add("");
+		cat01_pic17.add("Jelly");
 
 		cat01_pic18 = new Array<String>();
-		cat01_pic18.add("");
+		cat01_pic18.add("Kebab");
 
 		cat01_pic19 = new Array<String>();
 		cat01_pic19.add("Kidney Beans");
@@ -130,7 +130,7 @@ public class Dictionary {
 		cat01_pic25.add("Noodle Bowl");
 
 		cat01_pic26 = new Array<String>();
-		cat01_pic26.add("");
+		cat01_pic26.add("Lettuce");
 
 		cat01_pic27 = new Array<String>();
 		cat01_pic27.add("Corn");
@@ -148,16 +148,16 @@ public class Dictionary {
 		cat01_pic31.add("Gummy Bears");
 
 		cat01_pic32 = new Array<String>();
-		cat01_pic32.add("");
+		cat01_pic32.add("Pasta");
 
 		cat01_pic33 = new Array<String>();
-		cat01_pic33.add("");
+		cat01_pic33.add("Coffee Beans");
 
 		cat01_pic34 = new Array<String>();
 		cat01_pic34.add("Apples");
 
 		cat01_pic35 = new Array<String>();
-		cat01_pic35.add("");
+		cat01_pic35.add("Catfish");
 
 		cat01_pic36 = new Array<String>();
 		cat01_pic36.add("Hot Dog");
@@ -172,16 +172,16 @@ public class Dictionary {
 		cat01_pic39.add("Maple Syrup");
 
 		cat01_pic40 = new Array<String>();
-		cat01_pic40.add("");
+		cat01_pic40.add("Small Pizza");
 
 		cat01_pic41 = new Array<String>();
-		cat01_pic41.add("");
+		cat01_pic41.add("Prosciutto Caprese Salad");
 
 		cat01_pic42 = new Array<String>();
 		cat01_pic42.add("Grapefruit");
 
 		cat01_pic43 = new Array<String>();
-		cat01_pic43.add("");
+		cat01_pic43.add("Spaghetti");
 
 		cat01_pic44 = new Array<String>();
 		cat01_pic44.add("Carrot Shreds");
@@ -190,20 +190,20 @@ public class Dictionary {
 		cat01_pic45.add("Sugar Cubes");
 
 		cat01_pic46 = new Array<String>();
-		cat01_pic46.add("");
+		cat01_pic46.add("Raisins");
 
 		cat01_pic47 = new Array<String>();
-		cat01_pic47.add("");
+		cat01_pic47.add("Eggs");
 
 		cat01_pic48 = new Array<String>();
-		cat01_pic48.add("");
+		cat01_pic48.add("Bitters");
 
 		cat01_pic49 = new Array<String>();
 		cat01_pic49.add("Waffles");
-
+/*
 		cat01_pic50 = new Array<String>();
 		cat01_pic50.add("");
-/*
+
 		cat01_pic51 = new Array<String>();
 		cat01_pic51.add("");
 
@@ -357,23 +357,23 @@ public class Dictionary {
 		
 		cat01.put("Raw Asparagus", cat01_pic00);
 		cat01.put("Cooked Asparagus", cat01_pic01);
-		cat01.put("pic02", cat01_pic02);
+		cat01.put("Stew", cat01_pic02);
 		cat01.put("Blueberries", cat01_pic03);
-		cat01.put("pic01", cat01_pic04);
+		cat01.put("Dough", cat01_pic04);
 		cat01.put("Loaf of Bread", cat01_pic05);
-		cat01.put("pic01", cat01_pic06);
+		cat01.put("Ceviche", cat01_pic06);
 		cat01.put("Tomatoes", cat01_pic07);
-		cat01.put("pic01", cat01_pic08);
-		cat01.put("pic01", cat01_pic09);
-		cat01.put("French Fries", cat01_pic10);
+		cat01.put("Dim Sum", cat01_pic08);
+		cat01.put("Spinach", cat01_pic09);
+		cat01.put("French Fries", cat01_pic10); //same as pic13
 		cat01.put("Cup of Coffee", cat01_pic11);
-		cat01.put("pic01", cat01_pic12);
-		cat01.put("pic01", cat01_pic13);
-		cat01.put("pic01", cat01_pic14);
+		cat01.put("Flaxseed", cat01_pic12);
+		cat01.put("French Fries", cat01_pic13); //same as pic10
+		cat01.put("Smoothie", cat01_pic14);
 		cat01.put("Guacamole", cat01_pic15);
-		cat01.put("pic01", cat01_pic16);
-		cat01.put("pic01", cat01_pic17);
-		cat01.put("pic01", cat01_pic18);
+		cat01.put("Gyros", cat01_pic16);
+		cat01.put("Jelly", cat01_pic17);
+		cat01.put("Kebab", cat01_pic18);
 		cat01.put("Kidney Beans", cat01_pic19);
 		cat01.put("Kiwi", cat01_pic20);
 		cat01.put("Nachos", cat01_pic21);
@@ -381,32 +381,33 @@ public class Dictionary {
 		cat01.put("Flowers", cat01_pic23);
 		cat01.put("Salad", cat01_pic24);
 		cat01.put("Noodle Bowl", cat01_pic25);
-		cat01.put("pic01", cat01_pic26);
+		cat01.put("Lettuce", cat01_pic26);
 		cat01.put("Corn", cat01_pic27);
 		cat01.put("Cooked Onions", cat01_pic28);
 		cat01.put("Salmon", cat01_pic29);
 		cat01.put("Swiss Cheese", cat01_pic30);
 		cat01.put("Gummy Bears", cat01_pic31);
-		cat01.put("pic01", cat01_pic32);
-		cat01.put("pic01", cat01_pic33);
+		cat01.put("Pasta", cat01_pic32);
+		cat01.put("Coffee Beans", cat01_pic33);
 		cat01.put("Apples", cat01_pic34);
-		cat01.put("pic01", cat01_pic35);
+		cat01.put("Catfish", cat01_pic35);
 		cat01.put("Hotdog", cat01_pic36);
 		cat01.put("Pear", cat01_pic37);
 		cat01.put("Strawberries", cat01_pic38);
 		cat01.put("Maple Syrup", cat01_pic39);
-		cat01.put("pic01", cat01_pic40);
-		cat01.put("pic01", cat01_pic41);
+		cat01.put("Small Pizza", cat01_pic40);
+		cat01.put("Prosciutto Caprese Salad", cat01_pic41);
 		cat01.put("Grapefruit", cat01_pic42);
-		cat01.put("pic01", cat01_pic43);
+		cat01.put("Spaghetti", cat01_pic43);
 		cat01.put("Carrot Shreds", cat01_pic44);
 		cat01.put("Sugar Cubes", cat01_pic45);
-		cat01.put("pic01", cat01_pic46);
-		cat01.put("pic01", cat01_pic47);
-		cat01.put("pic01", cat01_pic48);
+		cat01.put("Raisins", cat01_pic46);
+		cat01.put("Eggs", cat01_pic47);
+		cat01.put("Bitters", cat01_pic48);
 		cat01.put("Waffles", cat01_pic49);
 		cat01.put("pic01", cat01_pic50);
-/*		cat01.put("pic01", cat01_pic51);
+/*
+		cat01.put("pic01", cat01_pic51);
 		cat01.put("pic02", cat01_pic52);
 		cat01.put("pic01", cat01_pic53);
 		cat01.put("pic01", cat01_pic54);
