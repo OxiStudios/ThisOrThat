@@ -22,12 +22,12 @@ public class GameScene {
 	float SCREEN_WIDTH;
 	float SCREEN_HEIGHT;
 	
-	public TextureAtlas backgrounds;
 	public Sprite background;
 	
 	public Timer timer;
 	
 	Stage stage;
+	Skin skin;
 	
 	ImageButton picture_One, picture_Two;
 	Table mainTable, pictureTableOne, pictureTableTwo;
@@ -37,7 +37,6 @@ public class GameScene {
 	
 	RandomPhoto randomPhoto;
 	
-	BitmapFont font;
 	float widthForTime;
 	
 	String randomWord;
@@ -49,10 +48,7 @@ public class GameScene {
 	int pic01_num;
 	int pic02_num;
 	
-	Dictionary dictionary = new Dictionary();
-	
 	boolean oneIsRight;
-	private boolean readyToRun;
 	private ThisOrThatGame game;
 	
 	public GameScene(ThisOrThatGame game) {
@@ -62,8 +58,9 @@ public class GameScene {
 		SCREEN_WIDTH  = Gdx.graphics.getWidth();
 		
 		stage = new Stage();
-		backgrounds = new TextureAtlas(Gdx.files.internal("data/backgrounds/backgrounds.pack"));
-		background  = new Sprite(backgrounds.createSprite("bg0" + Integer.toString(MathUtils.random(4) + 1)));
+		skin  = new Skin();
+		
+		background  = new Sprite(game.backgrounds.createSprite("bg0" + Integer.toString(MathUtils.random(4) + 1)));
 		background.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		
 		spriteBatch = new SpriteBatch();
@@ -73,9 +70,7 @@ public class GameScene {
 		
 		timer = new Timer(this);
 		
-		font = new BitmapFont(Gdx.files.internal("data/fonts/ourFont.fnt"), false);
-		font.setColor(Color.BLUE);
-		widthForTime = font.getBounds(Double.toString(timer.gameTimer)).width;
+		widthForTime = game.font.getBounds(Double.toString(timer.gameTimer)).width;
 		
 		Gdx.app.log("Screen", "Width: " + SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + SCREEN_HEIGHT);
@@ -103,10 +98,10 @@ public class GameScene {
 		
 		spriteBatch.begin();
 		background.draw(spriteBatch);
-		font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - font.getBounds(randomWord).width/2, SCREEN_HEIGHT - .20f * SCREEN_HEIGHT);
-		font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime + 4, .975f * SCREEN_HEIGHT);
-		font.draw(spriteBatch, Double.toString(this.gameScore), .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
-		font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - game.font.getBounds(randomWord).width/2, SCREEN_HEIGHT - .20f * SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime + 4, .975f * SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(this.gameScore), .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
 		spriteBatch.end();
 		
 		stage.draw();
@@ -152,7 +147,6 @@ public class GameScene {
 		}
 		
 		//make the skin for the buttons
-		Skin skin = new Skin();
 		
 		Sprite picOne_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic25"));
 		Sprite picTwo_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic34"));
@@ -179,7 +173,6 @@ public class GameScene {
 		
 		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, oneIsRight));
 		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !oneIsRight));
-		
 	}
 	
 	public void makeWord() {
@@ -190,12 +183,12 @@ public class GameScene {
 		//get the dictionary for either the first pic or the second pic
 		if(rand < 5){
 			//if rand is 0-4 get the dictionary that the first pic is in
-			dict = dictionary.getDictionary(pic01_catNum);
+			dict = game.dictionary.getDictionary(pic01_catNum);
 			//this will then make the first pic correct
 			oneIsRight = true;
 		}else{
 			//if rand is 5-9 get the dictionary that the second pic is in
-			dict = dictionary.getDictionary(pic02_catNum);
+			dict = game.dictionary.getDictionary(pic02_catNum);
 			//this will then make the second pic correct
 			oneIsRight = false;
 		}
@@ -227,7 +220,12 @@ public class GameScene {
 		//get the random word from the array of words
 		//this.randomWord = randomWordArray.get(MathUtils.random(2));
 		this.randomWord = "test word";
-		
+	}
+	
+	public void dispose() {
+		stage.dispose();
+		skin.dispose();
+		spriteBatch.dispose();
 	}
 
 }

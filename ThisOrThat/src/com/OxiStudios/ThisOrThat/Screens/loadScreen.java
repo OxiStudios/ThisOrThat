@@ -20,8 +20,6 @@ public class loadScreen implements Screen{
 	Sprite loadingSprite;
 	private ThisOrThatGame game;
 	
-	Animation animation;
-	
 	boolean isReady = false;
 	
 	public loadScreen(ThisOrThatGame game) {
@@ -38,6 +36,7 @@ public class loadScreen implements Screen{
 		
 		if(isReady) {
 			game.setScreen(new MainMenu(game));
+			this.dispose();
 		}
 	}
 
@@ -95,16 +94,6 @@ public class loadScreen implements Screen{
 				}
 			}
 		}).start();
-		
-		new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				game.textureHandler = new TextureHandler();
-			}
-			
-		}).start();
 	}
 
 	@Override
@@ -128,6 +117,7 @@ public class loadScreen implements Screen{
 	@Override
 	public void dispose() {
 		// TODO Auto-generated method stub
-		
+		loadingImage.dispose();
+		batch.dispose();
 	}
 }
