@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
+import com.OxiStudios.ThisOrThat.TextureHandler;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.Game.GameScreen;
 import com.badlogic.gdx.Gdx;
@@ -93,6 +94,16 @@ public class loadScreen implements Screen{
 					}
 				}
 			}
+		}).start();
+		
+		new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				game.textureHandler = new TextureHandler();
+			}
+			
 		}).start();
 	}
 

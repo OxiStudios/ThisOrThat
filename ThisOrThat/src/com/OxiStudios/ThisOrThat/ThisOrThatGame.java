@@ -1,13 +1,12 @@
 package com.OxiStudios.ThisOrThat;
 
-import com.OxiStudios.ThisOrThat.Game.GameScreen;
 import com.OxiStudios.ThisOrThat.Screens.loadScreen;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Screen;
 
 public class ThisOrThatGame extends Game {
 	
 	public int TotalScore;
+	public TextureHandler textureHandler;
 	
 	@Override
 	public void create() {

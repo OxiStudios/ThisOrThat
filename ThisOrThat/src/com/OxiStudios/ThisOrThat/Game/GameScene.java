@@ -135,10 +135,6 @@ public class GameScene {
 	
 	public void makeButtons() {
 		
-		// grab two random categories
-		TextureAtlas pic_one_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat01.pack"));
-		TextureAtlas pic_two_atlas = new TextureAtlas(Gdx.files.internal("data/photo/cat01.pack"));
-		
 		//make the styles for the buttons
 		ImageButtonStyle style_1 = new ImageButtonStyle();
 		ImageButtonStyle style_2 = new ImageButtonStyle();
@@ -158,8 +154,8 @@ public class GameScene {
 		//make the skin for the buttons
 		Skin skin = new Skin();
 		
-		Sprite picOne_sprite = new Sprite(pic_one_atlas.createSprite("pic25"));
-		Sprite picTwo_sprite = new Sprite(pic_two_atlas.createSprite("pic34"));
+		Sprite picOne_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic25"));
+		Sprite picTwo_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic34"));
 		picOne_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
 		picTwo_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
 		
