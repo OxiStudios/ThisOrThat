@@ -19,9 +19,6 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class GameScene {
 	
-	float SCREEN_WIDTH;
-	float SCREEN_HEIGHT;
-	
 	public Sprite background;
 	
 	public Timer timer;
@@ -54,14 +51,12 @@ public class GameScene {
 	public GameScene(ThisOrThatGame game) {
 		
 		this.game = game;
-		SCREEN_HEIGHT = Gdx.graphics.getHeight();
-		SCREEN_WIDTH  = Gdx.graphics.getWidth();
 		
 		stage = new Stage();
 		skin  = new Skin();
 		
 		background  = new Sprite(game.backgrounds.createSprite("bg0" + Integer.toString(MathUtils.random(4) + 1)));
-		background.setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
+		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		
 		spriteBatch = new SpriteBatch();
 		randomPhoto = new RandomPhoto();
@@ -72,8 +67,8 @@ public class GameScene {
 		
 		widthForTime = game.font.getBounds(Double.toString(timer.gameTimer)).width;
 		
-		Gdx.app.log("Screen", "Width: " + SCREEN_WIDTH);
-		Gdx.app.log("Screen", "Height: " + SCREEN_HEIGHT);
+		Gdx.app.log("Screen", "Width: " + game.SCREEN_WIDTH);
+		Gdx.app.log("Screen", "Height: " + game.SCREEN_HEIGHT);
 		
 		Gdx.input.setInputProcessor(stage);
 		
@@ -98,10 +93,10 @@ public class GameScene {
 		
 		spriteBatch.begin();
 		background.draw(spriteBatch);
-		game.font.draw(spriteBatch, randomWord, SCREEN_WIDTH/2 - game.font.getBounds(randomWord).width/2, SCREEN_HEIGHT - .20f * SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), SCREEN_WIDTH - widthForTime + 4, .975f * SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(this.gameScore), .01f * SCREEN_WIDTH, .99f * SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * SCREEN_WIDTH, .55f * SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, randomWord, game.SCREEN_WIDTH/2 - game.font.getBounds(randomWord).width/2, game.SCREEN_HEIGHT - .20f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.SCREEN_WIDTH - widthForTime + 4, .975f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(this.gameScore), .01f * game.SCREEN_WIDTH, .99f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * game.SCREEN_WIDTH, .55f * game.SCREEN_HEIGHT);
 		spriteBatch.end();
 		
 		stage.draw();
@@ -120,9 +115,9 @@ public class GameScene {
 		pictureTableOne.add(picture_One);
 		pictureTableTwo.add(picture_Two);
 	
-		mainTable.add(pictureTableOne).top().center().padTop(.18f * SCREEN_HEIGHT);
+		mainTable.add(pictureTableOne).top().center().padTop(.18f * game.SCREEN_HEIGHT);
 		mainTable.row();
-		mainTable.add(pictureTableTwo).top().center().padTop(.0848f * SCREEN_HEIGHT);
+		mainTable.add(pictureTableTwo).top().center().padTop(.0848f * game.SCREEN_HEIGHT);
 		
 		
 		stage.addActor(mainTable);
@@ -148,10 +143,10 @@ public class GameScene {
 		
 		//make the skin for the buttons
 		
-		Sprite picOne_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic25"));
-		Sprite picTwo_sprite = new Sprite(game.textureHandler.cat01.createSprite("pic34"));
-		picOne_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
-		picTwo_sprite.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic25"));
+		Sprite picTwo_sprite = new Sprite(game.cat01.createSprite("pic34"));
+		picOne_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
+		picTwo_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
 		skin.add("image_1", picOne_sprite);
 		skin.add("image_2", picTwo_sprite);
@@ -162,10 +157,10 @@ public class GameScene {
 		
 		//make the buttons and link them with the styles
 		picture_One = new ImageButton(style_1);
-		picture_One.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		picture_One.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
 		picture_Two = new ImageButton(style_2);
-		picture_Two.setSize(.59f * SCREEN_WIDTH, .25f * SCREEN_HEIGHT);
+		picture_Two.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
 		//testing purposes
 		picture_One.setName("image_1");

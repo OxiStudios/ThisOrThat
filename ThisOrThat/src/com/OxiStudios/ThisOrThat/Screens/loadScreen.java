@@ -1,16 +1,12 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
-import com.OxiStudios.ThisOrThat.TextureHandler;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
-import com.OxiStudios.ThisOrThat.Game.GameScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class loadScreen implements Screen{
@@ -33,9 +29,16 @@ public class loadScreen implements Screen{
 		batch.begin();
 		loadingSprite.draw(batch);
 		batch.end();
-		
-		if(isReady) {
+		if(game.manager.update()) {
+			//loading is done
+			//assign objects
+			game.cat01 = game.manager.get("data/photo/cat01.pack");
+			
+			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
+			game.font = game.manager.get("data/fonts/ourFont.fnt");
 			game.setScreen(new MainMenu(game));
+		}
+		if(isReady) {
 			this.dispose();
 		}
 	}
@@ -49,13 +52,17 @@ public class loadScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		
+
+		game.manager.load("data/loadingscreen/background_loop.pack", TextureAtlas.class);
+		game.manager.finishLoading();
+		
 		if(batch == null) {
 			batch = new SpriteBatch();
 		}
 		
 		if(loadingImage == null) {
-			
-			loadingImage = new TextureAtlas("data/loadingscreen/background_loop.pack");
+			loadingImage = game.manager.get("data/loadingscreen/background_loop.pack");
 		}
 		
 		if(loadingSprite == null) {
@@ -94,6 +101,10 @@ public class loadScreen implements Screen{
 				}
 			}
 		}).start();
+		
+		game.manager.load("data/photo/cat01.pack", TextureAtlas.class);
+		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
+		game.manager.load("data/fonts/ourFont.fnt", BitmapFont.class);
 	}
 
 	@Override
