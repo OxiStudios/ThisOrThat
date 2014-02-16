@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
+//Tyler Liddicoat
 public class Dictionary {
 
 	ObjectMap<String, Array<String>> cat01, cat02;
