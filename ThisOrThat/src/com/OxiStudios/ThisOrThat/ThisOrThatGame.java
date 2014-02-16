@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat;
 
+import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.OxiStudios.ThisOrThat.Screens.loadScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -10,6 +11,8 @@ import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
 
 public class ThisOrThatGame extends Game {
+	
+	public MainMenu mainMenu;
 	
 	public int TotalScore;
 	public Dictionary dictionary;
@@ -26,6 +29,8 @@ public class ThisOrThatGame extends Game {
 	
 	@Override
 	public void create() {
+		mainMenu = new MainMenu(this);
+		
 		SCREEN_WIDTH  = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
 		

@@ -36,10 +36,11 @@ public class loadScreen implements Screen{
 			
 			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
 			game.font = game.manager.get("data/fonts/ourFont.fnt");
-			game.setScreen(new MainMenu(game));
+			
 		}
 		if(isReady) {
 			this.dispose();
+			game.setScreen(game.mainMenu);
 		}
 	}
 

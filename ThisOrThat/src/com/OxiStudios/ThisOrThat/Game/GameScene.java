@@ -55,7 +55,7 @@ public class GameScene {
 		stage = new Stage();
 		skin  = new Skin();
 		
-		background  = new Sprite(game.backgrounds.createSprite("bg0" + Integer.toString(MathUtils.random(4) + 1)));
+		background  = new Sprite(game.backgrounds.createSprite("bg06"));
 		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		
 		spriteBatch = new SpriteBatch();
@@ -63,7 +63,7 @@ public class GameScene {
 		
 		gameScore = 750.0;
 		
-		timer = new Timer(this);
+		timer = new Timer(game, this);
 		
 		widthForTime = game.font.getBounds(Double.toString(timer.gameTimer)).width;
 		
@@ -72,10 +72,10 @@ public class GameScene {
 		
 		Gdx.input.setInputProcessor(stage);
 		
-		pic01_catNum = randomPhoto.randomPic("cat");
-		pic02_catNum = randomPhoto.randomPic("cat");
-		pic01_num    = randomPhoto.randomPic("pic");
-		pic02_num    = randomPhoto.randomPic("pic");
+		pic01_catNum = randomPhoto.randomPic();
+		pic02_catNum = randomPhoto.randomPic();
+		pic01_num    = randomPhoto.randomPic();
+		pic02_num    = randomPhoto.randomPic();
 	
 
 		makeButtons();
@@ -101,8 +101,8 @@ public class GameScene {
 		
 		stage.draw();
 		stage.act();
-		Table.drawDebug(stage);
 		
+		timer.render();
 	}
 	
 	public void makeTables() {
@@ -143,8 +143,8 @@ public class GameScene {
 		
 		//make the skin for the buttons
 		
-		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic25"));
-		Sprite picTwo_sprite = new Sprite(game.cat01.createSprite("pic34"));
+		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic01_num)));
+		Sprite picTwo_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic02_num)));
 		picOne_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		picTwo_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
@@ -189,32 +189,15 @@ public class GameScene {
 		}
 		
 		if(oneIsRight){
-			
-			//first is correct so we need to get the a random word that matches pic two
-			if(pic01_num < 10){
-				
-				//if the pic has a 0 in it like pic00- pic09
-				randomWordArray = dict.get("pic0" + Integer.toString(pic01_num));	
-			}else{
-				
-				//if the pic does not have a 0 in it: pic10 - pic99
-				randomWordArray = dict.get("pic" + Integer.toString(pic01_num));
-			}
-			
+			//if the pic does not have a 0 in it: pic10 - pic99
+			randomWordArray = dict.get("pic" + Integer.toString(pic01_num));
 		}else{
-			
-			//second is correct so we need to get the a random word that matches pic two
-			if(pic02_num < 10) {
-				
-				randomWordArray = dict.get("cat01_" + "pic0" + Integer.toString(pic02_num));
-			}else{
-				
-				randomWordArray = dict.get("cat01_" + "pic" + Integer.toString(pic02_num));
-			}
+			//second is correct so we need to get the a random word that matches pic two		
+			randomWordArray = dict.get("cat01_" + "pic" + Integer.toString(pic02_num));
 		}
 		//get the random word from the array of words
 		//this.randomWord = randomWordArray.get(MathUtils.random(2));
-		this.randomWord = "test word";
+		this.randomWord = randomWordArray.get(0);
 	}
 	
 	public void dispose() {

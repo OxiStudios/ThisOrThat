@@ -1,6 +1,7 @@
 package com.OxiStudios.ThisOrThat.Game;
 
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
+import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.TimeUtils;
 
@@ -8,20 +9,19 @@ public class Timer {
 	
 	Thread timerThread;
 	private GameScene gameScene;
-	private double NANO = 1000000000.0;
-	
-	private long startTime;
-	private long currentTime;
 	
 	public double gameTimer;
 	
-	public Timer(GameScene gameScene) {
+	private boolean outOfTime;
+	private ThisOrThatGame game;
+	
+	public Timer(ThisOrThatGame game, GameScene gameScene) {
+		this.game      = game;
 		this.gameScene = gameScene;
 		
-		gameTimer = 3.5 * 1000; //3 seconds
+		gameTimer = 2.0 * 1000; //3 seconds
 		
-		startTime   = TimeUtils.nanoTime();
-		currentTime = TimeUtils.nanoTime();
+		outOfTime = false;
 		
 		timerThread = new Thread(new Runnable() {
 
@@ -35,8 +35,9 @@ public class Timer {
 					}catch(InterruptedException e){
 						
 					}
-					currentTime = TimeUtils.nanoTime();
 				}
+				
+				outOfTime = true;
 			}
 			
 		});
@@ -48,9 +49,7 @@ public class Timer {
 			gameTimer -= 10;			
 		}else{
 			gameTimer = 0;
-			if(gameTimer == 0) {
-				
-			}
+			outOfTime = true;
 		}
 		if(gameScene.gameScore >= 20.1) {
 			gameScene.gameScore -= 2.5;			
@@ -62,6 +61,14 @@ public class Timer {
 	
 	public double getTimer() {
 		return gameTimer / 1000;
+	}
+	
+	public void render() {
+		if(outOfTime) {
+			//display losing screen
+			gameScene.dispose();
+			game.setScreen(new MainMenu(game));
+		}
 	}
 
 }
