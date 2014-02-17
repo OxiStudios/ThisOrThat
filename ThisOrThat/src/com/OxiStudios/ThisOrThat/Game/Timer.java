@@ -19,7 +19,7 @@ public class Timer {
 		this.game      = game;
 		this.gameScene = gameScene;
 		
-		gameTimer = 2.0 * 1000; //3 seconds
+		gameTimer = 2.0 * 1000; //2 seconds
 		
 		outOfTime = false;
 		
@@ -28,7 +28,7 @@ public class Timer {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				while(gameTimer > 0){
+				while(gameTimer > 0 && !Timer.this.gameScene.popUp){
 					countDown();
 					try{
 						Thread.sleep(10);
@@ -66,8 +66,11 @@ public class Timer {
 	public void render() {
 		if(outOfTime) {
 			//display losing screen
-			gameScene.dispose();
-			game.setScreen(new MainMenu(game));
+			gameScene.gotItWrong = true;
+			if(gameScene.newScreen && !gameScene.gotItRight) {
+				gameScene.dispose();
+				game.setScreen(new MainMenu(game));
+			}
 		}
 	}
 

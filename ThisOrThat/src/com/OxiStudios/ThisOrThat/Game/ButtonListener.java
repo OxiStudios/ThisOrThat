@@ -29,18 +29,14 @@ public class ButtonListener extends InputListener{
          if(timer.gameTimer > 0 && isCorrect && !hasBeenClicked) {
         	 
         	 //the player got it right!
-        	 
+        	 gameScene.gotItRight = true;
         	 game.TotalScore += gameScene.gameScore;
-        	 //play ding sound for getting it right
-        	 //dispose last screen's shit
-        	 game.getScreen().dispose();
-        	 //reset the game 
-        	 game.setScreen(new GameScreen(game));
+        	 
          }else if(timer.gameTimer > 0 && !isCorrect && !hasBeenClicked) {
         	 
         	 //the player got it wrong :(
-        	 
-        	 //stop the game and show screen
+        	 gameScene.gotItWrong = true;
+        	 //set Popup window.
          }
          return true;
 	}

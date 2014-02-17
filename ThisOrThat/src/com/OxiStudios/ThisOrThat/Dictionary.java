@@ -39,9 +39,9 @@ public class Dictionary {
 
 	public ObjectMap<String, Array<String>> getDictionary(int cat) {
 		switch (cat) {
-		case 01:
+		case 1:
 			return cat01;
-		case 02:
+		case 2:
 			return cat02;
 		default:
 			return cat01;
@@ -201,11 +201,11 @@ public class Dictionary {
 
 		cat01_pic49 = new Array<String>();
 		cat01_pic49.add("Waffles");
-/*
-		cat01_pic50 = new Array<String>();
-		cat01_pic50.add("");
 
-		cat01_pic51 = new Array<String>();
+		cat01_pic50 = new Array<String>();
+		cat01_pic50.add("test");
+
+/*		cat01_pic51 = new Array<String>();
 		cat01_pic51.add("");
 
 		cat01_pic52 = new Array<String>();

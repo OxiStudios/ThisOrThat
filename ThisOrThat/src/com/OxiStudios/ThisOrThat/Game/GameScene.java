@@ -1,32 +1,29 @@
 package com.OxiStudios.ThisOrThat.Game;
 
-import com.OxiStudios.ThisOrThat.Dictionary;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
+import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 
 public class GameScene {
 	
-	public Sprite background;
+	public Sprite background, correct, incorrect, popUpWindow, countDown;
 	
 	public Timer timer;
 	
 	Stage stage;
 	Skin skin;
 	
-	ImageButton picture_One, picture_Two;
+	ImageButton picture_One, picture_Two, popUpRetryButton, popUpMenuButton;
 	Table mainTable, pictureTableOne, pictureTableTwo;
 	private SpriteBatch spriteBatch;
 	
@@ -44,8 +41,15 @@ public class GameScene {
 	int pic02_catNum;
 	int pic01_num;
 	int pic02_num;
+	int count;
 	
 	boolean oneIsRight;
+	boolean gotItRight;
+	boolean gotItWrong;
+	boolean newScreen;
+	boolean popUp;
+	boolean countDownBoolean;
+	boolean startTimer;
 	private ThisOrThatGame game;
 	
 	public GameScene(ThisOrThatGame game) {
@@ -55,8 +59,23 @@ public class GameScene {
 		stage = new Stage();
 		skin  = new Skin();
 		
-		background  = new Sprite(game.backgrounds.createSprite("bg06"));
+		if(game.gameScreenCount == 0) {
+			countDownBoolean = true;
+		}else{
+			countDownBoolean = false;
+		}
+		background       = new Sprite(game.backgrounds.createSprite("background_game"));
+		correct          = new Sprite(game.backgrounds.createSprite("background_game_greenarrows"));
+		incorrect        = new Sprite(game.backgrounds.createSprite("background_game_redarrows"));
+		popUpWindow      = new Sprite(game.popUp.createSprite("main"));
+		countDown        = new Sprite(game.countDown.createSprite("countDown3"));
+		
+		countDown.setPosition(0, 0);
+		countDown.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+		popUpWindow.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+		correct.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+		incorrect.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		
 		spriteBatch = new SpriteBatch();
 		randomPhoto = new RandomPhoto();
@@ -72,35 +91,102 @@ public class GameScene {
 		
 		Gdx.input.setInputProcessor(stage);
 		
-		pic01_catNum = randomPhoto.randomPic();
-		pic02_catNum = randomPhoto.randomPic();
+		pic01_catNum = 1;
+		pic02_catNum = 1;
+		
 		pic01_num    = randomPhoto.randomPic();
 		pic02_num    = randomPhoto.randomPic();
-	
+		
+		count        = 3;
+		
+		while(pic01_num == pic02_num) {
+			pic02_num    = randomPhoto.randomPic();
+		}
 
 		makeButtons();
-		makeWord();
 		makeTables();
 		
-
-		timer.timerThread.start();
+		gotItRight = false;
+		gotItWrong = false;
+		newScreen  = false;
+		popUp      = false;
+		startTimer = true;
 	}
 	
 	
 	public void render() {
-
-		
 		
 		spriteBatch.begin();
 		background.draw(spriteBatch);
-		game.font.draw(spriteBatch, randomWord, game.SCREEN_WIDTH/2 - game.font.getBounds(randomWord).width/2, game.SCREEN_HEIGHT - .20f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.SCREEN_WIDTH - widthForTime + 4, .975f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(this.gameScore), .01f * game.SCREEN_WIDTH, .99f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, Double.toString(game.TotalScore), .45f * game.SCREEN_WIDTH, .55f * game.SCREEN_HEIGHT);
-		spriteBatch.end();
 		
+		if(newScreen){
+			
+			try {
+				Thread.sleep(500);
+				//reset the game 
+				
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			game.gameScreenCount++;
+			game.setScreen(new GameScreen(game));
+		}
+		
+		
+		if(gotItRight) {
+			correct.draw(spriteBatch);
+			newScreen = true;
+		}
+		
+		if(gotItWrong) {
+			incorrect.draw(spriteBatch);
+			popUp = true;
+		}
+		
+		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
+		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.timer_position.x - widthForTime, game.timer_position.y);
+		game.font.draw(spriteBatch, Double.toString(this.gameScore), game.point_position.x, game.point_position.y);
+		game.font.draw(spriteBatch, Double.toString(game.TotalScore), game.score_position.x, game.score_position.y);
+		
+		spriteBatch.end();
+
 		stage.draw();
 		stage.act();
+		
+		spriteBatch.begin();
+		
+		if(popUp) {
+			try {
+				this.timer.timerThread.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			popUpWindow.draw(spriteBatch);
+		}
+		
+		if(countDownBoolean) {
+			Gdx.app.log("countDown", "count down is drawning");
+			countDown.draw(spriteBatch);
+			try {
+				Thread.sleep(1000);
+				count--;
+				countDown.set(game.countDown.createSprite("countDown" + count));
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			if(count < 2) {
+				countDownBoolean = false;
+			}
+		}else if(startTimer) {
+			timer.timerThread.start();
+			startTimer = false;
+		}
+		
+		spriteBatch.end();
+		
 		
 		timer.render();
 	}
@@ -129,18 +215,6 @@ public class GameScene {
 		ImageButtonStyle style_1 = new ImageButtonStyle();
 		ImageButtonStyle style_2 = new ImageButtonStyle();
 		
-		if(pic01_num < 10){
-			picOne_Name = "pic0" + Integer.toString(pic01_num);
-		}else{
-			picOne_Name = "pic" + Integer.toString(pic01_num);
-		}
-		
-		if(pic02_num < 10) {			
-			picTwo_Name = "pic0" + Integer.toString(pic02_num);
-		}else{
-			picTwo_Name = "pic" + Integer.toString(pic02_num);
-		}
-		
 		//make the skin for the buttons
 		
 		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic01_num)));
@@ -166,11 +240,6 @@ public class GameScene {
 		picture_One.setName("image_1");
 		picture_Two.setName("image_2");
 		
-		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, oneIsRight));
-		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !oneIsRight));
-	}
-	
-	public void makeWord() {
 		int rand = MathUtils.random(9);
 		ObjectMap<String, Array<String>> dict;
 		Array<String> randomWordArray;
@@ -189,15 +258,19 @@ public class GameScene {
 		}
 		
 		if(oneIsRight){
-			//if the pic does not have a 0 in it: pic10 - pic99
+			Gdx.app.log("One", "One is right");
 			randomWordArray = dict.get("pic" + Integer.toString(pic01_num));
 		}else{
-			//second is correct so we need to get the a random word that matches pic two		
-			randomWordArray = dict.get("cat01_" + "pic" + Integer.toString(pic02_num));
+			//second is correct so we need to get the a random word that matches pic two
+			Gdx.app.log("Two", "Two is right");
+			randomWordArray = dict.get("pic" + Integer.toString(pic02_num));
 		}
 		//get the random word from the array of words
 		//this.randomWord = randomWordArray.get(MathUtils.random(2));
 		this.randomWord = randomWordArray.get(0);
+		
+		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, oneIsRight));
+		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !oneIsRight));
 	}
 	
 	public void dispose() {

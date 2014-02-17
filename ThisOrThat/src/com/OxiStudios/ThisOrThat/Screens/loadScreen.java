@@ -15,6 +15,9 @@ public class loadScreen implements Screen{
 	TextureAtlas loadingImage;
 	Sprite loadingSprite;
 	private ThisOrThatGame game;
+	int animationPlace;
+	
+	float currentTime, startTime;
 	
 	boolean isReady = false;
 	
@@ -32,22 +35,39 @@ public class loadScreen implements Screen{
 		if(game.manager.update()) {
 			//loading is done
 			//assign objects
-			game.cat01 = game.manager.get("data/photo/cat01.pack");
-			
-			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
-			game.font = game.manager.get("data/fonts/ourFont.fnt");
-			
-		}
-		if(isReady) {
+			game.cat01       = game.manager.get("data/photo/cat01.pack");
+			game.popUp       = game.manager.get("data/popUp/popUp.pack");
+			game.backgrounds = game.manager.get("data/backgrounds/game_backgrounds.pack");
+			game.countDown   = game.manager.get("data/countDown/countDown.pack");
+			game.font        = game.manager.get("data/fonts/ourFont.fnt");
+
 			this.dispose();
 			game.setScreen(game.mainMenu);
+			
 		}
+		
+		if(animationPlace > 5) {
+			animationPlace = 1;
+		}
+		
+		if(currentTime - startTime >= 30000) {
+			Gdx.app.log("LoadingScreen", "next picture called");
+			animationPlace++;
+			startTime = currentTime;
+			loadingSprite.set(loadingImage.createSprite("background_loop" + Integer.toString(animationPlace)));
+			loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+		}
+		
+		currentTime = TimeUtils.nanoTime();
+
+		Gdx.app.log("startTime", "" + startTime + " Current Time: " + currentTime);
+		
 	}
 
 	@Override
 	public void resize(int width, int height) {
 		// TODO Auto-generated method stub
-		
+			
 	}
 
 	@Override
@@ -55,6 +75,10 @@ public class loadScreen implements Screen{
 		// TODO Auto-generated method stub
 		
 
+		animationPlace = 1;
+		startTime = TimeUtils.nanoTime();
+		currentTime = 0;
+		Gdx.app.log("startTime", "" + startTime + " Current Time: " + currentTime);
 		game.manager.load("data/loadingscreen/background_loop.pack", TextureAtlas.class);
 		game.manager.finishLoading();
 		
@@ -71,41 +95,11 @@ public class loadScreen implements Screen{
 			loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
-		new Thread(new Runnable() {
-			long startTime = TimeUtils.millis();
-			long currentTime = TimeUtils.millis();
-			long elapseTime = 0;
-			int animationPlace = 1;
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				while(elapseTime <= 4000) {
-					elapseTime = currentTime - startTime;
-					if(animationPlace > 5) {
-						animationPlace = 1;
-					}
-					
-					loadingSprite.set(loadingImage.createSprite("background_loop" + Integer.toString(animationPlace)));
-					loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-					animationPlace++;
-					try{
-						Thread.sleep(1000/30);
-					}catch(InterruptedException e) {
-						
-					}
-					
-					currentTime = TimeUtils.millis();
-					Gdx.app.log("ElapseTime", "" + elapseTime);
-					if(elapseTime >= 3999) {
-						isReady = true;
-					}
-				}
-			}
-		}).start();
-		
 		game.manager.load("data/photo/cat01.pack", TextureAtlas.class);
-		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
+		game.manager.load("data/backgrounds/game_backgrounds.pack", TextureAtlas.class);
 		game.manager.load("data/fonts/ourFont.fnt", BitmapFont.class);
+		game.manager.load("data/popUp/popUp.pack", TextureAtlas.class);
+		game.manager.load("data/countDown/countDown.pack", TextureAtlas.class);
 	}
 
 	@Override
