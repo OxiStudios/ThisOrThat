@@ -67,10 +67,12 @@ public class Timer {
 		if(outOfTime) {
 			//display losing screen
 			gameScene.gotItWrong = true;
-			if(gameScene.newScreen && !gameScene.gotItRight) {
-				gameScene.dispose();
-				game.setScreen(new MainMenu(game));
-			}
+			
+			//I believe this is not correct
+//			if(gameScene.newScreen && !gameScene.gotItRight) {
+//				gameScene.dispose();
+//				game.setScreen(new MainMenu(game));
+//			}
 		}
 	}
 

@@ -9,7 +9,7 @@ background_game
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
-  index: 2
+  index: 3
 background_game_greenarrows
   rotate: false
   xy: 1083, 1

@@ -1,6 +1,5 @@
 package com.OxiStudios.ThisOrThat;
 
-import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.OxiStudios.ThisOrThat.Screens.loadScreen;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -13,11 +12,11 @@ import com.badlogic.gdx.math.Vector2;
 
 public class ThisOrThatGame extends Game {
 	
-	public MainMenu mainMenu;
-	
 	public int TotalScore;
 	public Dictionary dictionary;
 	public BitmapFont font;
+	
+	public TextureAtlas mainMenu;
 	public TextureAtlas backgrounds;
 	public TextureAtlas cat01;
 	public TextureAtlas popUp;
@@ -32,9 +31,11 @@ public class ThisOrThatGame extends Game {
 	public float SCREEN_WIDTH;
 	public float SCREEN_HEIGHT;
 	
+	public SaveFile savefile;
+	
 	@Override
 	public void create() {
-		mainMenu = new MainMenu(this);
+		savefile = new SaveFile();
 		
 		SCREEN_WIDTH  = Gdx.graphics.getWidth();
 		SCREEN_HEIGHT = Gdx.graphics.getHeight();
@@ -49,10 +50,18 @@ public class ThisOrThatGame extends Game {
 		setScreen(new loadScreen(this));
 		
 		if(SCREEN_WIDTH < 1080) {
-			//less than 1080p
 			word_position = new Vector2(SCREEN_WIDTH/2f, SCREEN_HEIGHT - .225f * SCREEN_HEIGHT);
 			point_position = new Vector2(.51f * SCREEN_WIDTH, .427f * SCREEN_HEIGHT);
 			score_position = new Vector2(.18f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
+			pic_two_position = new Vector2();
+			pic_one_position = new Vector2();
+			timer_position = new Vector2((.95f * SCREEN_WIDTH), .96f * SCREEN_HEIGHT);
+			
+		}else if(SCREEN_WIDTH < 720) {
+			//less than 1080p
+			word_position = new Vector2(SCREEN_WIDTH/2f, SCREEN_HEIGHT - .225f * SCREEN_HEIGHT);
+			point_position = new Vector2(.51f * SCREEN_WIDTH, .427f * SCREEN_HEIGHT);
+			score_position = new Vector2(.19f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
 			pic_two_position = new Vector2();
 			pic_one_position = new Vector2();
 			timer_position = new Vector2((.95f * SCREEN_WIDTH), .96f * SCREEN_HEIGHT);
@@ -65,6 +74,7 @@ public class ThisOrThatGame extends Game {
 			pic_two_position = new Vector2();
 			pic_one_position = new Vector2();
 			timer_position = new Vector2((.945f * SCREEN_WIDTH), .955f * SCREEN_HEIGHT);
+			
 		}
 		
 		gameScreenCount = 0;
@@ -75,6 +85,7 @@ public class ThisOrThatGame extends Game {
 		backgrounds = new TextureAtlas();
 		cat01       = new TextureAtlas();
 		getReady    = new TextureAtlas();
+		mainMenu    = new TextureAtlas();
 	}
 
 	@Override

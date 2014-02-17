@@ -9,7 +9,7 @@ main
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
-  index: 3
+  index: 4
 MainMenu
   rotate: false
   xy: 1, 1

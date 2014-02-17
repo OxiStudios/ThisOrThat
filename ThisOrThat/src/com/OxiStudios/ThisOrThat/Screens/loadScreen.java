@@ -38,13 +38,15 @@ public class loadScreen implements Screen{
 			//loading is done
 			//assign objects
 			game.cat01       = game.manager.get("data/photo/cat01.pack");
+			
+			game.mainMenu    = game.manager.get("data/menu/menu.pack");
 			game.popUp       = game.manager.get("data/popUp/popUp.pack");
 			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
-			game.getReady   = game.manager.get("data/getReady/getReady.pack");
+			game.getReady    = game.manager.get("data/getReady/getReady.pack");
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
 
 			this.dispose();
-			game.setScreen(game.mainMenu);
+			game.setScreen(new MainMenu(game));
 			
 		}else{
 			Gdx.app.log("load", "" + currentPicture);
@@ -95,6 +97,8 @@ public class loadScreen implements Screen{
 		}
 		
 		game.manager.load("data/photo/cat01.pack", TextureAtlas.class);
+		
+		game.manager.load("data/menu/menu.pack", TextureAtlas.class);
 		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
 		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
 		game.manager.load("data/getReady/getReady.pack", TextureAtlas.class);

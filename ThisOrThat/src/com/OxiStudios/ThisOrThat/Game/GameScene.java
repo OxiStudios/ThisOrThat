@@ -5,7 +5,6 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
-import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
@@ -148,6 +147,22 @@ public class GameScene {
 		if(gotItWrong) {
 			incorrect.draw(spriteBatch);
 			popUp = true;
+			
+			//check if they got a new highest right in a row
+			if(game.gameScreenCount >= game.savefile.inARow) {
+				game.savefile.inARow = game.gameScreenCount;
+			}
+			
+			//check if they got a new highscore
+			if(game.TotalScore >= game.savefile.highScore) {
+				game.savefile.highScore = game.TotalScore;
+			}
+			
+			//add one to total number of games played
+			game.savefile.gamesPlayed++;
+			
+			//stats have been updated, save the file
+			game.savefile.save();
 		}
 		
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
