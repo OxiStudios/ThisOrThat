@@ -56,6 +56,12 @@ public class GameScene {
 		
 		this.game = game;
 		
+		if(game.SCREEN_WIDTH >= 1080) {
+			game.font.setScale(2.5f);
+		}else{
+			game.font.setScale(.9f);
+		}
+		
 		stage = new Stage();
 		skin  = new Skin();
 		
@@ -68,7 +74,7 @@ public class GameScene {
 		correct          = new Sprite(game.backgrounds.createSprite("background_game_greenarrows"));
 		incorrect        = new Sprite(game.backgrounds.createSprite("background_game_redarrows"));
 		popUpWindow      = new Sprite(game.popUp.createSprite("main"));
-		countDown        = new Sprite(game.countDown.createSprite("countDown3"));
+		countDown        = new Sprite(game.getReady.createSprite("getready"));
 		
 		countDown.setPosition(0, 0);
 		countDown.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
@@ -172,7 +178,6 @@ public class GameScene {
 			try {
 				Thread.sleep(1000);
 				count--;
-				countDown.set(game.countDown.createSprite("countDown" + count));
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -1,0 +1,160 @@
+
+loading_bar.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_loading2
+  rotate: false
+  xy: 1, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 0
+background_loading2
+  rotate: false
+  xy: 1, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 1
+background_loading2
+  rotate: false
+  xy: 1083, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 11
+background_loading2
+  rotate: false
+  xy: 1083, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 13
+background_loading2
+  rotate: false
+  xy: 2165, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 15
+background_loading2
+  rotate: false
+  xy: 2165, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 17
+
+loading_bar2.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_loading2
+  rotate: false
+  xy: 1, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 19
+background_loading2
+  rotate: false
+  xy: 1, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 21
+background_loading2
+  rotate: false
+  xy: 1083, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 23
+background_loading2
+  rotate: false
+  xy: 1083, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 25
+background_loading2
+  rotate: false
+  xy: 2165, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 27
+background_loading2
+  rotate: false
+  xy: 2165, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 29
+
+loading_bar3.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_loading2
+  rotate: false
+  xy: 1, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 3
+background_loading2
+  rotate: false
+  xy: 1, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 31
+background_loading2
+  rotate: false
+  xy: 1083, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 33
+background_loading2
+  rotate: false
+  xy: 1083, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 35
+background_loading2
+  rotate: false
+  xy: 2165, 1923
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 36
+background_loading2
+  rotate: false
+  xy: 2165, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 5
+
+loading_bar4.png
+format: RGBA8888
+filter: Nearest,Nearest
+repeat: none
+background_loading2
+  rotate: false
+  xy: 1, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 7
+background_loading2
+  rotate: false
+  xy: 1083, 1
+  size: 1080, 1920
+  orig: 1080, 1920
+  offset: 0, 0
+  index: 9
