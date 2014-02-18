@@ -2,6 +2,7 @@ package com.OxiStudios.ThisOrThat.MainMenuButtonListeners;
 
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.Game.GameScreen;
+import com.OxiStudios.ThisOrThat.Screens.GetReadyScreen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
 
@@ -34,9 +35,11 @@ public class PlayListener implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
+		Gdx.app.log("point", "X: " + screenX + " Y: " + screenY);
+		Gdx.app.log("position", "" + .3255f * game.SCREEN_HEIGHT);
 		if(screenX > (.2759f * game.SCREEN_WIDTH) && screenX < ((.2759f * game.SCREEN_WIDTH) + (.4490 * game.SCREEN_WIDTH))) {
 			Gdx.app.log("Test", "touch at correct x bounds");
-			if(screenY > (.4860f * game.SCREEN_HEIGHT) && screenY < ((.4860f * game.SCREEN_HEIGHT) + (.0807 * game.SCREEN_HEIGHT))) {
+			if(screenY > (.5921f * game.SCREEN_HEIGHT) && screenY < (.6734f * game.SCREEN_HEIGHT)) {
 				Gdx.app.log("Test", "touch at correct y bounds");
 				game.setScreen(new GameScreen(game));
 			}

@@ -13,6 +13,7 @@ public class loadScreen implements Screen{
 	
 	SpriteBatch batch;
 	TextureAtlas loadingImage;
+	TextureAtlas backgroundAtlas;
 	Sprite loadingSprite;
 	Sprite background;
 	private ThisOrThatGame game;
@@ -49,9 +50,9 @@ public class loadScreen implements Screen{
 			game.setScreen(new MainMenu(game));
 			
 		}else{
-			Gdx.app.log("load", "" + currentPicture);
 			currentPicture =  game.manager.getProgress();
-			loadingSprite.set(loadingImage.createSprite("background_loading2", 7));
+			Gdx.app.log("load", "" + currentPicture);
+			loadingSprite.set(loadingImage.createSprite("loading_bar" + 7));
 			loadingSprite.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		}
 		
@@ -75,7 +76,8 @@ public class loadScreen implements Screen{
 		startTime = TimeUtils.nanoTime();
 		currentTime = 0;
 		Gdx.app.log("startTime", "" + startTime + " Current Time: " + currentTime);
-		game.manager.load("data/loadingscreen/loading_bar.pack", TextureAtlas.class);
+		game.manager.load("data/loadingscreen/loading.pack", TextureAtlas.class);
+		game.manager.load("data/loadingscreen/loading_background.atlas", TextureAtlas.class);
 		game.manager.finishLoading();
 		
 		if(batch == null) {
@@ -83,16 +85,21 @@ public class loadScreen implements Screen{
 		}
 		
 		if(loadingImage == null) {
-			loadingImage = game.manager.get("data/loadingscreen/loading_bar.pack");
+			loadingImage = game.manager.get("data/loadingscreen/loading.pack");
+			
+		}
+		
+		if(backgroundAtlas == null) {
+			backgroundAtlas = game.manager.get("data/loadingscreen/loading_background.atlas");
 		}
 		
 		if(loadingSprite == null) {
-			loadingSprite = loadingImage.createSprite("background_loading2", 1);
+			loadingSprite = loadingImage.createSprite("loading_bar" + 1);
 			loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
 		if(background == null) {
-			background = new Sprite(loadingImage.createSprite("background_loading2", 0));
+			background = new Sprite(backgroundAtlas.createSprite("background_loading2"));
 			background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		

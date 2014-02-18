@@ -8,9 +8,11 @@ import com.badlogic.gdx.InputProcessor;
 public class QuitButtonListener implements InputProcessor{
 	
 	private ThisOrThatGame game;
+	private GameScene gameScene;
 
-	public QuitButtonListener(ThisOrThatGame game) {
-		this.game = game;
+	public QuitButtonListener(ThisOrThatGame game, GameScene gameScene) {
+		this.game  = game;
+		this.gameScene = gameScene;
 	}
 
 	@Override
@@ -33,12 +35,15 @@ public class QuitButtonListener implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(screenX > (.3138f * game.SCREEN_WIDTH) && screenX < ((.3138f * game.SCREEN_WIDTH) + (.3722f * game.SCREEN_WIDTH))) {
-			if(screenY > (.3958f * game.SCREEN_HEIGHT) && screenY < ((.0531f * game.SCREEN_HEIGHT) + (.3958f * game.SCREEN_HEIGHT))) {
-				game.setScreen(new MainMenu(game));
-				Gdx.app.log("Screen", "Quit button clicked");
-			}
-			
+		if(gameScene.popUp) {
+			if(screenX > (.3138f * game.SCREEN_WIDTH) && screenX < ((.3138f * game.SCREEN_WIDTH) + (.3722f * game.SCREEN_WIDTH))) {
+				Gdx.app.log("x", "clicked in correct x area");
+				if(screenY > (.5520f * game.SCREEN_HEIGHT) && screenY < (.6041f * game.SCREEN_HEIGHT)) {
+					game.setScreen(new MainMenu(game));
+					gameScene.popUp = false;
+					Gdx.app.log("Screen", "Quit button clicked");
+				}	
+			}			
 		}
 		
 		return false;

@@ -54,7 +54,6 @@ public class Timer {
 		}else{
 			gameScene.gameScore = 20;
 		}
-		Gdx.app.log("Timer", "" + gameTimer / 1000 + " Score: " + gameScene.gameScore);
 	}
 	
 	public double getTimer() {
@@ -66,11 +65,7 @@ public class Timer {
 			//display losing screen
 			gameScene.gotItWrong = true;
 			
-			//I believe this is not correct
-//			if(gameScene.newScreen && !gameScene.gotItRight) {
-//				gameScene.dispose();
-//				game.setScreen(new MainMenu(game));
-//			}
+			
 		}
 	}
 

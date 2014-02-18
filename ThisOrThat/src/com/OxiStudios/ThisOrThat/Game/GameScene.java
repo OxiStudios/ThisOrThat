@@ -3,6 +3,7 @@ package com.OxiStudios.ThisOrThat.Game;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -32,6 +33,8 @@ public class GameScene {
 	
 	public double gameScore;
 	
+	Sound correctSound;
+	
 	RandomPhoto randomPhoto;
 	
 	float widthForTime;
@@ -51,7 +54,6 @@ public class GameScene {
 	boolean gotItWrong;
 	boolean newScreen;
 	boolean popUp;
-	boolean countDownBoolean;
 	boolean startTimer;
 	private ThisOrThatGame game;
 	
@@ -68,22 +70,18 @@ public class GameScene {
 		stage = new Stage();
 		skin  = new Skin();
 		
-		if(game.gameScreenCount == 0) {
-			countDownBoolean = true;
-		}else{
-			countDownBoolean = false;
-		}
 		background       = new Sprite(game.backgrounds.createSprite("background_game"));
 		correct          = new Sprite(game.backgrounds.createSprite("background_game_greenarrows"));
 		incorrect        = new Sprite(game.backgrounds.createSprite("background_game_redarrows"));
 		popUpWindow      = new Sprite(game.popUp.createSprite("main"));
-		countDown        = new Sprite(game.getReady.createSprite("getready"));
 		
 		countDown.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		popUpWindow.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		correct.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		incorrect.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
+		
+		correctSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/correct.wav"));
 		
 		spriteBatch = new SpriteBatch();
 		randomPhoto = new RandomPhoto();
@@ -97,10 +95,13 @@ public class GameScene {
 		Gdx.app.log("Screen", "Width: " + game.SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + game.SCREEN_HEIGHT);
 		
-		retryButtonListener  = new RetryButtonListener(game);
-		quitButtonListener   = new QuitButtonListener(game);
+		retryButtonListener  = new RetryButtonListener(game, this);
+		quitButtonListener   = new QuitButtonListener(game, this);
 		inputHanlder   = new InputMultiplexer();
 		
+
+		inputHanlder.addProcessor(quitButtonListener);
+		inputHanlder.addProcessor(retryButtonListener);
 		inputHanlder.addProcessor(stage);
 		Gdx.input.setInputProcessor(inputHanlder);
 		
@@ -119,11 +120,11 @@ public class GameScene {
 		makeButtons();
 		makeTables();
 		
-		gotItRight = false;
-		gotItWrong = false;
-		newScreen  = false;
-		popUp      = false;
-		startTimer = true;
+		gotItRight      = false;
+		gotItWrong      = false;
+		newScreen       = false;
+		popUp           = false;
+		startTimer      = true;
 	}
 	
 	
@@ -133,7 +134,7 @@ public class GameScene {
 		background.draw(spriteBatch);
 		
 		if(newScreen){
-			
+			correctSound.play(1f);
 			try {
 				Thread.sleep(500);
 				//reset the game 
@@ -149,13 +150,12 @@ public class GameScene {
 		
 		if(gotItRight) {
 			correct.draw(spriteBatch);
-			newScreen = true;
+			newScreen       = true;
 		}
 		
 		if(gotItWrong) {
 			incorrect.draw(spriteBatch);
 			popUp = true;
-			
 			//check if they got a new highest right in a row
 			if(game.gameScreenCount >= game.savefile.inARow) {
 				game.savefile.inARow = game.gameScreenCount;
@@ -172,9 +172,6 @@ public class GameScene {
 			//stats have been updated, save the file
 			game.savefile.save();
 			
-			inputHanlder.removeProcessor(stage);
-			inputHanlder.addProcessor(quitButtonListener);
-			inputHanlder.addProcessor(retryButtonListener);
 		}
 		
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
@@ -190,6 +187,8 @@ public class GameScene {
 		spriteBatch.begin();
 		
 		if(popUp) {
+			gotItWrong = false;
+			
 			try {
 				this.timer.timerThread.join();
 			} catch (InterruptedException e) {
@@ -202,27 +201,7 @@ public class GameScene {
 			retry_sprite.draw(spriteBatch);
 		}
 		
-		if(countDownBoolean) {
-			Gdx.app.log("countDown", "count down is drawning");
-			countDown.draw(spriteBatch);
-			try {
-				Thread.sleep(1000);
-				count--;
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			if(count < 2) {
-				countDownBoolean = false;
-			}
-		}else if(startTimer) {
-			timer.timerThread.start();
-			startTimer = false;
-		}
-		
 		spriteBatch.end();
-		
-		
 		timer.render();
 	}
 	
@@ -293,11 +272,9 @@ public class GameScene {
 		}
 		
 		if(oneIsRight){
-			Gdx.app.log("One", "One is right");
 			randomWordArray = dict.get("pic" + Integer.toString(pic01_num));
 		}else{
 			//second is correct so we need to get the a random word that matches pic two
-			Gdx.app.log("Two", "Two is right");
 			randomWordArray = dict.get("pic" + Integer.toString(pic02_num));
 		}
 		//get the random word from the array of words
@@ -312,6 +289,7 @@ public class GameScene {
 		stage.dispose();
 		skin.dispose();
 		spriteBatch.dispose();
+		correctSound.dispose();
 	}
 
 }

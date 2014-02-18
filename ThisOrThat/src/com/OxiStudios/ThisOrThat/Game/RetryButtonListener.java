@@ -10,8 +10,10 @@ public class RetryButtonListener implements InputProcessor{
 	
 
 	private ThisOrThatGame game;
-	public RetryButtonListener(ThisOrThatGame game) {
+	private GameScene gameScene;
+	public RetryButtonListener(ThisOrThatGame game, GameScene gameScene) {
 		this.game = game;
+		this.gameScene = gameScene;
 	}
 
 	@Override
@@ -34,12 +36,14 @@ public class RetryButtonListener implements InputProcessor{
 
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-		if(screenX > (.3138f * game.SCREEN_WIDTH) && screenX < ((.3138f * game.SCREEN_WIDTH) + (.3722f * game.SCREEN_WIDTH))) {
-			
-			if(screenY > (.4796f * game.SCREEN_HEIGHT) && screenY < ((.0531f * game.SCREEN_HEIGHT) + (.4671f * game.SCREEN_HEIGHT))){
-				Gdx.app.log("Screen", "Retry button clicked");
-				game.TotalScore = 0;
-				game.setScreen(new GameScreen(game));
+		if(gameScene.popUp) {
+			if(screenX > (.3138f * game.SCREEN_WIDTH) && screenX < ((.3138f * game.SCREEN_WIDTH) + (.3722f * game.SCREEN_WIDTH))) {
+				if(screenY > (.4791f * game.SCREEN_HEIGHT) && screenY < (.5312f * game.SCREEN_HEIGHT)){
+					Gdx.app.log("Screen", "Retry button clicked");
+					game.TotalScore = 0;
+					game.setScreen(new GameScreen(game));
+				}
+				
 			}
 			
 		}
