@@ -48,20 +48,20 @@ public class ThisOrThatGame extends Game {
 		manager = new AssetManager();
 		
 		setScreen(new loadScreen(this));
-		
-		if(SCREEN_WIDTH < 1080) {
+		if(SCREEN_WIDTH < 720) {
+			//less than 720p
 			word_position = new Vector2(SCREEN_WIDTH/2f, SCREEN_HEIGHT - .225f * SCREEN_HEIGHT);
 			point_position = new Vector2(.51f * SCREEN_WIDTH, .427f * SCREEN_HEIGHT);
-			score_position = new Vector2(.18f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
+			score_position = new Vector2(.20f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
 			pic_two_position = new Vector2();
 			pic_one_position = new Vector2();
 			timer_position = new Vector2((.95f * SCREEN_WIDTH), .96f * SCREEN_HEIGHT);
 			
-		}else if(SCREEN_WIDTH < 720) {
+		}else if(SCREEN_WIDTH < 1080) {
 			//less than 1080p
 			word_position = new Vector2(SCREEN_WIDTH/2f, SCREEN_HEIGHT - .225f * SCREEN_HEIGHT);
 			point_position = new Vector2(.51f * SCREEN_WIDTH, .427f * SCREEN_HEIGHT);
-			score_position = new Vector2(.19f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
+			score_position = new Vector2(.18f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
 			pic_two_position = new Vector2();
 			pic_one_position = new Vector2();
 			timer_position = new Vector2((.95f * SCREEN_WIDTH), .96f * SCREEN_HEIGHT);

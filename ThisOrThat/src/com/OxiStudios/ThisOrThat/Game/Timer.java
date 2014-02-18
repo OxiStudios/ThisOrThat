@@ -1,9 +1,7 @@
 package com.OxiStudios.ThisOrThat.Game;
 
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
-import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.utils.TimeUtils;
 
 public class Timer {
 	

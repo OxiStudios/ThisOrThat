@@ -2,12 +2,12 @@ package com.OxiStudios.ThisOrThat.Game;
 
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
-import com.badlogic.gdx.scenes.scene2d.ui.ImageButton.ImageButtonStyle;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.utils.Array;
@@ -15,16 +15,19 @@ import com.badlogic.gdx.utils.ObjectMap;
 
 public class GameScene {
 	
-	public Sprite background, correct, incorrect, popUpWindow, countDown;
+	public Sprite background, correct, incorrect, popUpWindow, countDown, menu_sprite, retry_sprite;
+	private InputMultiplexer inputHanlder;
 	
 	public Timer timer;
 	
 	Stage stage;
 	Skin skin;
 	
-	ImageButton picture_One, picture_Two, popUpRetryButton, popUpMenuButton;
+	ImageButton picture_One, picture_Two;
 	Table mainTable, pictureTableOne, pictureTableTwo;
 	private SpriteBatch spriteBatch;
+	
+	private PopUpButtonListener popUpListener;
 	
 	public double gameScore;
 	
@@ -75,7 +78,6 @@ public class GameScene {
 		popUpWindow      = new Sprite(game.popUp.createSprite("main"));
 		countDown        = new Sprite(game.getReady.createSprite("getready"));
 		
-		countDown.setPosition(0, 0);
 		countDown.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		popUpWindow.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
@@ -94,7 +96,11 @@ public class GameScene {
 		Gdx.app.log("Screen", "Width: " + game.SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + game.SCREEN_HEIGHT);
 		
-		Gdx.input.setInputProcessor(stage);
+		popUpListener  = new PopUpButtonListener(game);
+		inputHanlder   = new InputMultiplexer();
+		
+		inputHanlder.addProcessor(stage);
+		Gdx.input.setInputProcessor(inputHanlder);
 		
 		pic01_catNum = 1;
 		pic02_catNum = 1;
@@ -184,7 +190,12 @@ public class GameScene {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+			
+			inputHanlder.removeProcessor(stage);
+			inputHanlder.addProcessor(popUpListener);
 			popUpWindow.draw(spriteBatch);
+			menu_sprite.draw(spriteBatch);
+			retry_sprite.draw(spriteBatch);
 		}
 		
 		if(countDownBoolean) {
@@ -231,29 +242,29 @@ public class GameScene {
 	
 	public void makeButtons() {
 		
-		//make the styles for the buttons
-		ImageButtonStyle style_1 = new ImageButtonStyle();
-		ImageButtonStyle style_2 = new ImageButtonStyle();
-		
 		//make the skin for the buttons
 		
 		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic01_num)));
 		Sprite picTwo_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic02_num)));
+		menu_sprite   = new Sprite(game.popUp.createSprite("MainMenu"));
+		retry_sprite  = new Sprite(game.popUp.createSprite("Retry"));
+		menu_sprite.setPosition(.3138f * game.SCREEN_WIDTH, .3958f * game.SCREEN_HEIGHT);
+		retry_sprite.setPosition(.3138f * game.SCREEN_WIDTH, .4671f * game.SCREEN_HEIGHT);
+		
+		menu_sprite.setSize(.3722f * game.SCREEN_WIDTH, .0531f * game.SCREEN_HEIGHT);
+		retry_sprite.setSize(menu_sprite.getWidth(), menu_sprite.getHeight());
 		picOne_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		picTwo_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
+		
 		
 		skin.add("image_1", picOne_sprite);
 		skin.add("image_2", picTwo_sprite);
 		
-		//link the skins with the styles
-		style_1.imageUp = skin.newDrawable("image_1");
-		style_2.imageUp = skin.newDrawable("image_2");
-		
 		//make the buttons and link them with the styles
-		picture_One = new ImageButton(style_1);
+		picture_One = new ImageButton(skin.newDrawable("image_1"));
 		picture_One.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
-		picture_Two = new ImageButton(style_2);
+		picture_Two = new ImageButton(skin.newDrawable("image_2"));
 		picture_Two.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
 		//testing purposes
