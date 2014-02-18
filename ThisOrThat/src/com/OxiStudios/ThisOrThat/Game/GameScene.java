@@ -27,7 +27,8 @@ public class GameScene {
 	Table mainTable, pictureTableOne, pictureTableTwo;
 	private SpriteBatch spriteBatch;
 	
-	private PopUpButtonListener popUpListener;
+	private RetryButtonListener retryButtonListener;
+	private QuitButtonListener quitButtonListener;
 	
 	public double gameScore;
 	
@@ -96,7 +97,8 @@ public class GameScene {
 		Gdx.app.log("Screen", "Width: " + game.SCREEN_WIDTH);
 		Gdx.app.log("Screen", "Height: " + game.SCREEN_HEIGHT);
 		
-		popUpListener  = new PopUpButtonListener(game);
+		retryButtonListener  = new RetryButtonListener(game);
+		quitButtonListener   = new QuitButtonListener(game);
 		inputHanlder   = new InputMultiplexer();
 		
 		inputHanlder.addProcessor(stage);
@@ -169,6 +171,10 @@ public class GameScene {
 			
 			//stats have been updated, save the file
 			game.savefile.save();
+			
+			inputHanlder.removeProcessor(stage);
+			inputHanlder.addProcessor(quitButtonListener);
+			inputHanlder.addProcessor(retryButtonListener);
 		}
 		
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
@@ -191,8 +197,6 @@ public class GameScene {
 				e.printStackTrace();
 			}
 			
-			inputHanlder.removeProcessor(stage);
-			inputHanlder.addProcessor(popUpListener);
 			popUpWindow.draw(spriteBatch);
 			menu_sprite.draw(spriteBatch);
 			retry_sprite.draw(spriteBatch);

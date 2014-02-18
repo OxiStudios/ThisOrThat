@@ -1,8 +1,15 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Screen;
 
 public class StatsScreen implements Screen{
+	
+	private ThisOrThatGame game;
+
+	public StatsScreen(ThisOrThatGame game) {
+		this.game = game;
+	}
 
 	@Override
 	public void render(float delta) {
