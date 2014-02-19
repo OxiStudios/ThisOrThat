@@ -41,7 +41,7 @@ public class PlayListener implements InputProcessor{
 			Gdx.app.log("Test", "touch at correct x bounds");
 			if(screenY > (.5921f * game.SCREEN_HEIGHT) && screenY < (.6734f * game.SCREEN_HEIGHT)) {
 				Gdx.app.log("Test", "touch at correct y bounds");
-				game.setScreen(new GameScreen(game));
+				game.setScreen(new GetReadyScreen(game));
 			}
 		}
 		return false;

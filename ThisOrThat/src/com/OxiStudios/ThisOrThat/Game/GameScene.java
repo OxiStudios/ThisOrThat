@@ -57,14 +57,17 @@ public class GameScene {
 	boolean startTimer;
 	private ThisOrThatGame game;
 	
+	
 	public GameScene(ThisOrThatGame game) {
 		
 		this.game = game;
 		
 		if(game.SCREEN_WIDTH >= 1080) {
 			game.font.setScale(2.5f);
-		}else{
-			game.font.setScale(.9f);
+		}else if(game.SCREEN_WIDTH >= 720){
+			game.font.setScale(2.5f * .6666f);
+		}else if(game.SCREEN_WIDTH >= 360) {
+			game.font.setScale(.3333f * 2.5f);
 		}
 		
 		stage = new Stage();
@@ -75,7 +78,6 @@ public class GameScene {
 		incorrect        = new Sprite(game.backgrounds.createSprite("background_game_redarrows"));
 		popUpWindow      = new Sprite(game.popUp.createSprite("main"));
 		
-		countDown.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		popUpWindow.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		correct.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
@@ -129,6 +131,11 @@ public class GameScene {
 	
 	
 	public void render() {
+		
+		if(startTimer) {
+			timer.timerThread.start();
+			startTimer = false;
+		}
 		
 		spriteBatch.begin();
 		background.draw(spriteBatch);
