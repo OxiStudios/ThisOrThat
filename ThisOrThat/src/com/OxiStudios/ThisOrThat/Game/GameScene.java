@@ -184,7 +184,17 @@ public class GameScene {
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
 		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.timer_position.x - widthForTime, game.timer_position.y);
 		game.font.draw(spriteBatch, Double.toString(this.gameScore), game.point_position.x, game.point_position.y);
-		game.font.draw(spriteBatch, Double.toString(game.TotalScore), game.score_position.x, game.score_position.y);
+		if(game.TotalScore >= 1000.0) {
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000.0) + "K", game.score_position.x, game.score_position.y);
+		}else if(game.TotalScore >= 10000.0){
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore/10000.0), game.score_position.x, game.score_position.y);
+		}else if(game.TotalScore >= 100000.0) {
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore/100000.0), game.score_position.x, game.score_position.y);
+		}else if(game.TotalScore >= 1000000.0) {
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000000.0), game.score_position.x, game.score_position.y);
+		}else{
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore), game.score_position.x, game.score_position.y);
+		}
 		
 		spriteBatch.end();
 

@@ -31,7 +31,7 @@ public class SaveFile {
 	
 	String readFile;
 	
-	Array<Character> chars;
+	String[] strings;
 	
 	public SaveFile() {
 		load();
@@ -43,19 +43,33 @@ public class SaveFile {
 			save();
 		}else{
 			file = Gdx.files.external("ThisOrThat/save.save");
+			
 			readFile = file.readString();
-			for(int i = 0; i < 10; ++i) {
-				chars.add(readFile.subSequence(i, i).charAt(0));
-			}
+			strings = readFile.split(",");
+			
+			gamesPlayed    = Float.parseFloat(strings[0]);
+			longestGame    = Float.parseFloat(strings[1]);
+			closestTime    = Float.parseFloat(strings[2]);
+			fastestReponse = Float.parseFloat(strings[3]);
+			inARow         = Float.parseFloat(strings[4]);
+			playTime       = Float.parseFloat(strings[5]);
+			highScore      = Float.parseFloat(strings[6]);
+			
 		}
 	}
 	
 	public void save() {
 		//save the game files
-		file.writeString(Float.toString(gamesPlayed) + "\n", false);
-		file.writeString(Float.toString(longestGame) + "\n", true);
-		file.writeString(Float.toString(closestTime) + "\n", true);
-		file.writeString(Float.toString(fastestReponse) + "\n", true);
+		file.writeString(Float.toString(gamesPlayed) + ",", false);
+		file.writeString(Float.toString(longestGame) + ",", true);
+		file.writeString(Float.toString(closestTime) + ",", true);
+		file.writeString(Float.toString(fastestReponse) + ",", true);
+		file.writeString(Float.toString(inARow) + ",", true);
+		file.writeString(Float.toString(playTime) + ",", true);
+		file.writeString(Float.toString(highScore) + ",", true);
+		
+		Gdx.app.log("save", "file has been saved");
+		
 	}
 
 }
