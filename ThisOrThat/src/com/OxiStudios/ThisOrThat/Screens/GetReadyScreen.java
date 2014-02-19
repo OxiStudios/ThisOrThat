@@ -30,7 +30,7 @@ public class GetReadyScreen implements Screen {
 		background.draw(spriteBatch);
 		spriteBatch.end();
 		
-		if(currentTime - startTime >= 1500) {
+		if(currentTime - startTime >= 200000) {
 			game.setScreen(new GameScreen(game));
 		}
 		
