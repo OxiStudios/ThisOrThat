@@ -4,6 +4,7 @@ import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputProcessor;
+import com.badlogic.gdx.utils.TimeUtils;
 
 public class QuitButtonListener implements InputProcessor{
 	
@@ -42,6 +43,12 @@ public class QuitButtonListener implements InputProcessor{
 					game.setScreen(new MainMenu(game));
 					game.TotalScore = 0;
 					gameScene.popUp = false;
+					game.endGameTime = TimeUtils.nanoTime();
+					game.savefile.playTime += (game.endGameTime - game.startGameTime);
+					if(game.endGameTime - game.startGameTime > game.savefile.longestGame) {
+						game.savefile.longestGame = (game.endGameTime - game.startGameTime);
+					}
+					Gdx.app.log("PlayTime: ", "" + game.savefile.playTime); 
 					Gdx.app.log("Screen", "Quit button clicked");
 				}	
 			}			

@@ -21,6 +21,7 @@ public class ThisOrThatGame extends Game {
 	public TextureAtlas cat01;
 	public TextureAtlas popUp;
 	public TextureAtlas getReady;
+	public TextureAtlas stats;
 	
 	public int gameScreenCount;
 	
@@ -32,6 +33,9 @@ public class ThisOrThatGame extends Game {
 	public float SCREEN_HEIGHT;
 	
 	public SaveFile savefile;
+	
+	public float startGameTime;
+	public float endGameTime;
 	
 	@Override
 	public void create() {
@@ -65,6 +69,8 @@ public class ThisOrThatGame extends Game {
 		cat01       = new TextureAtlas();
 		getReady    = new TextureAtlas();
 		mainMenu    = new TextureAtlas();
+		stats       = new TextureAtlas();
+		
 	}
 
 	@Override
