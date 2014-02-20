@@ -114,11 +114,11 @@ public class GameScene {
 		//stops from adding a lot of numbers to games played in the save file
 		getGamesPlayed = 0;
 		
-		pic01_catNum = MathUtils.random(21) + 1;
-		pic02_catNum = MathUtils.random(21) + 1;
+		pic01_catNum = MathUtils.random(13) + 1;
+		pic02_catNum = MathUtils.random(13) + 1;
 		
 		while(pic01_catNum == pic02_catNum) {
-			pic02_catNum = MathUtils.random(21) + 1;
+			pic02_catNum = MathUtils.random(13) + 1;
 		}
 		
 		folderbuf1 = (20 * (pic01_catNum - 1)) + 50;			

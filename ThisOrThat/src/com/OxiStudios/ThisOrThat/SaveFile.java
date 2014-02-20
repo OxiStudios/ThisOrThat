@@ -38,11 +38,11 @@ public class SaveFile {
 	}
 	
 	private void load() {
-		if(!Gdx.files.external("ThisOrThat/save.save").exists()) {
-			this.file = Gdx.files.external("ThisOrThat/save.save");
+		if(!Gdx.files.local("/ThisOrThat/save.save").exists()) {
+			this.file = Gdx.files.local("/ThisOrThat/save.save");
 			save();
 		}else{
-			file = Gdx.files.external("ThisOrThat/save.save");
+			file = Gdx.files.local("/ThisOrThat/save.save");
 			
 			readFile = file.readString();
 			strings = readFile.split(",");

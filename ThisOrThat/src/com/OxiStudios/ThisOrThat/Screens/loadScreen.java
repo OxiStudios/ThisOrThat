@@ -46,7 +46,7 @@ public class loadScreen implements Screen{
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
 			game.stats       = game.manager.get("data/statsbackground/background.pack");
 			
-			for(int i = 0; i < 23; i++) {
+			for(int i = 0; i < 14; i++) {
 				game.pictures.add(new TextureAtlas("data/photo/folder" + Integer.toString((i + 1)) + ".pack"));
 			}
 
@@ -126,15 +126,6 @@ public class loadScreen implements Screen{
 		game.manager.load("data/photo/folder12.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder13.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder14.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder15.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder16.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder17.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder18.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder19.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder20.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder21.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder22.pack", TextureAtlas.class);
-		game.manager.load("data/photo/folder23.pack", TextureAtlas.class);
 
 	}
 
