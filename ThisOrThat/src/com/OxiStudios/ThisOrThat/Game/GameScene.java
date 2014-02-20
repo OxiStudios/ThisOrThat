@@ -38,6 +38,7 @@ public class GameScene {
 	RandomPhoto randomPhoto;
 	
 	float widthForTime;
+	float getGamesPlayed;
 	
 	String randomWord;
 	String picOne_Name;
@@ -107,6 +108,9 @@ public class GameScene {
 		inputHanlder.addProcessor(stage);
 		Gdx.input.setInputProcessor(inputHanlder);
 		
+		//stops from adding a lot of numbers to games played in the save file
+		getGamesPlayed = 0;
+		
 		pic01_catNum = 1;
 		pic02_catNum = 1;
 		
@@ -174,7 +178,10 @@ public class GameScene {
 			}
 			
 			//add one to total number of games played
-			game.savefile.gamesPlayed++;
+			getGamesPlayed++;
+			if(getGamesPlayed == 1){
+				game.savefile.gamesPlayed++;
+			}
 			
 			//stats have been updated, save the file
 			game.savefile.save();
@@ -186,12 +193,8 @@ public class GameScene {
 		game.font.draw(spriteBatch, Double.toString(this.gameScore), game.point_position.x, game.point_position.y);
 		if(game.TotalScore >= 1000.0) {
 			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000.0) + "K", game.score_position.x, game.score_position.y);
-		}else if(game.TotalScore >= 10000.0){
-			game.font.draw(spriteBatch, Double.toString(game.TotalScore/10000.0), game.score_position.x, game.score_position.y);
-		}else if(game.TotalScore >= 100000.0) {
-			game.font.draw(spriteBatch, Double.toString(game.TotalScore/100000.0), game.score_position.x, game.score_position.y);
 		}else if(game.TotalScore >= 1000000.0) {
-			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000000.0), game.score_position.x, game.score_position.y);
+			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000000.0) + "M", game.score_position.x, game.score_position.y);
 		}else{
 			game.font.draw(spriteBatch, Double.toString(game.TotalScore), game.score_position.x, game.score_position.y);
 		}

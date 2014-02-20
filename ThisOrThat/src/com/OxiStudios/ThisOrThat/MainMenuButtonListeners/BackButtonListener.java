@@ -1,17 +1,14 @@
 package com.OxiStudios.ThisOrThat.MainMenuButtonListeners;
 
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
-import com.OxiStudios.ThisOrThat.Game.GameScreen;
-import com.OxiStudios.ThisOrThat.Screens.GetReadyScreen;
-import com.badlogic.gdx.Gdx;
+import com.OxiStudios.ThisOrThat.Screens.MainMenu;
 import com.badlogic.gdx.InputProcessor;
-import com.badlogic.gdx.utils.TimeUtils;
 
-public class PlayListener implements InputProcessor{
+public class BackButtonListener implements InputProcessor{
 	
 	private ThisOrThatGame game;
 
-	public PlayListener(ThisOrThatGame game) {
+	public BackButtonListener(ThisOrThatGame game) {
 		this.game = game;
 	}
 
@@ -36,14 +33,9 @@ public class PlayListener implements InputProcessor{
 	@Override
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
-		Gdx.app.log("point", "X: " + screenX + " Y: " + screenY);
-		Gdx.app.log("position", "" + .3255f * game.SCREEN_HEIGHT);
-		if(screenX > (.2759f * game.SCREEN_WIDTH) && screenX < ((.2759f * game.SCREEN_WIDTH) + (.4490 * game.SCREEN_WIDTH))) {
-			Gdx.app.log("Test", "touch at correct x bounds");
-			if(screenY > (.5921f * game.SCREEN_HEIGHT) && screenY < (.6734f * game.SCREEN_HEIGHT)) {
-				Gdx.app.log("Test", "touch at correct y bounds");
-				game.setScreen(new GetReadyScreen(game));
-				game.startGameTime = TimeUtils.nanoTime();
+		if(screenX > (.2731 * game.SCREEN_WIDTH) && screenX < (.7222 * game.SCREEN_WIDTH)) {
+			if(screenY > (.8723f * game.SCREEN_HEIGHT) && screenY < (.9531f * game.SCREEN_HEIGHT)) {
+				game.setScreen(new MainMenu(game));
 			}
 		}
 		return false;

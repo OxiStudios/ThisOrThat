@@ -45,6 +45,7 @@ public class loadScreen implements Screen{
 			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
 			game.getReady    = game.manager.get("data/getReady/getReady.pack");
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
+			game.stats       = game.manager.get("data/stats/background.pack");
 
 			this.dispose();
 			game.setScreen(new MainMenu(game));
@@ -110,6 +111,7 @@ public class loadScreen implements Screen{
 		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
 		game.manager.load("data/getReady/getReady.pack", TextureAtlas.class);
 		game.manager.load("data/popUp/popUp.pack", TextureAtlas.class);
+		game.manager.load("data/stats/background.pack", TextureAtlas.class);
 	}
 
 	@Override

@@ -34,7 +34,7 @@ public class StatsListener implements InputProcessor{
 	public boolean touchDown(int screenX, int screenY, int pointer, int button) {
 		// TODO Auto-generated method stub
 		if(screenX > (.2759f * game.SCREEN_WIDTH) && screenX < ((.2759f * game.SCREEN_WIDTH) + (.4490 * game.SCREEN_WIDTH))) {
-			if(screenY > (.2317f * game.SCREEN_HEIGHT) && screenY < ((.2317f * game.SCREEN_HEIGHT) + (.0807 * game.SCREEN_HEIGHT))) {
+			if(screenY > (.6875f * game.SCREEN_HEIGHT) && screenY < (.7682f * game.SCREEN_HEIGHT)) {
 				game.setScreen(new StatsScreen(game));
 			}
 		}

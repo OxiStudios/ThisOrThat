@@ -6,13 +6,13 @@ import com.badlogic.gdx.utils.Array;
 
 public class SaveFile {
 	
-	//highest score
+	//highest score, done
 	public float highScore;
 	
-	//amount of time played in the game in seconds
+	//amount of time played in the game in seconds, done
 	public float playTime;
 	
-	//highest amount that the player got in a row
+	//highest amount that the player got in a row, done
 	public float inARow;
 	
 	//closest time to 2 seconds it took them to respond
@@ -21,10 +21,10 @@ public class SaveFile {
 	//closest time to losing
 	public float closestTime;
 	
-	//longest game they have played
+	//longest game they have played, donoe
 	public float longestGame;
 	
-	//total amount of games played
+	//total amount of games played, done
 	public float gamesPlayed;
 	
 	FileHandle file;
