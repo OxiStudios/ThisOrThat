@@ -78,7 +78,8 @@ public class StatsScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		strings = Float.toString(game.savefile.longestGame/1000000000f).split(".");
+		String string = Float.toString(game.savefile.longestGame/1000000000f);
+		strings = string.split("\\.");
 		Gdx.app.log("asdf", Float.toString(game.savefile.longestGame/1000000000f));
 		
 		if(spriteBatch == null) {
