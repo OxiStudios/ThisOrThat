@@ -1122,34 +1122,34 @@ public class Dictionary {
 		cat01_pic322.add("Capsicum");
 
 		cat01_pic323 = new Array<String>();
-		cat01_pic323.add("");
+		cat01_pic323.add("Measuring Tape");
 
 		cat01_pic324 = new Array<String>();
-		cat01_pic324.add("");
+		cat01_pic324.add("Palm Trees");
 
 		cat01_pic325 = new Array<String>();
-		cat01_pic325.add("");
+		cat01_pic325.add("Flashlight");
 		
 		cat01_pic326 = new Array<String>();
-		cat01_pic326.add("");
+		cat01_pic326.add("Karaoke Mic");
 		
 		cat01_pic327 = new Array<String>();
-		cat01_pic327.add("");
+		cat01_pic327.add("Wheelbarrow");
 
 		cat01_pic328 = new Array<String>();
-		cat01_pic328.add("");
+		cat01_pic328.add("Metal Chains");
 
 		cat01_pic329 = new Array<String>();
-		cat01_pic329.add("");
+		cat01_pic329.add("Slippers");
 
 		cat01_pic330 = new Array<String>();
-		cat01_pic330.add("");
+		cat01_pic330.add("Colored Pencils");
 
 		cat01_pic331 = new Array<String>();
-		cat01_pic331.add("");
+		cat01_pic331.add("Billiard Balls");
 
 		cat01_pic332 = new Array<String>();
-		cat01_pic332.add("");
+		cat01_pic332.add("Alarm Clock");
 
 		cat01_pic333 = new Array<String>();
 		cat01_pic333.add("Lemon");
@@ -1188,34 +1188,34 @@ public class Dictionary {
 		cat01_pic344.add("Lobster");
 
 		cat01_pic345 = new Array<String>();
-		cat01_pic345.add("");
+		cat01_pic345.add("Paint");
 
 		cat01_pic346 = new Array<String>();
-		cat01_pic346.add("");
+		cat01_pic346.add("Pinecone");
 
 		cat01_pic347 = new Array<String>();
-		cat01_pic347.add("");
+		cat01_pic347.add("Turntable");
 
 		cat01_pic348 = new Array<String>();
-		cat01_pic348.add("");
+		cat01_pic348.add("Roman Numerals");
 
 		cat01_pic349 = new Array<String>();
-		cat01_pic349.add("");
+		cat01_pic349.add("Candle");
 
 		cat01_pic350 = new Array<String>();
-		cat01_pic350.add("");
+		cat01_pic350.add("Party Hat");
 
 		cat01_pic351 = new Array<String>();
-		cat01_pic351.add("");
+		cat01_pic351.add("Clothing Pins");
 
 		cat01_pic352 = new Array<String>();
-		cat01_pic352.add("");
+		cat01_pic352.add("Bow");
 
 		cat01_pic353 = new Array<String>();
-		cat01_pic353.add("");
+		cat01_pic353.add("Ornament");
 
 		cat01_pic354 = new Array<String>();
-		cat01_pic354.add("");
+		cat01_pic354.add("Stone Bench");
 
 		cat01_pic355 = new Array<String>();
 		cat01_pic355.add("Salmon");
@@ -1512,7 +1512,7 @@ public class Dictionary {
 		cat01_pic452.add("Anteater");
 
 		cat01_pic453 = new Array<String>();
-		cat01_pic453.add("");
+		cat01_pic453.add("Antelope");
 
 		cat01_pic454 = new Array<String>();
 		cat01_pic454.add("Tortoise");
@@ -1575,10 +1575,10 @@ public class Dictionary {
 		cat01_pic473.add("Great Horned Owl");
 
 		cat01_pic474 = new Array<String>();
-		cat01_pic474.add("");
+		cat01_pic474.add("White Pelican");
 
 		cat01_pic475 = new Array<String>();
-		cat01_pic475.add("");
+		cat01_pic475.add("Baby Jaguar");
 
 		cat01_pic476 = new Array<String>();
 		cat01_pic476.add("Leopard");
@@ -1635,25 +1635,25 @@ public class Dictionary {
 		cat01_pic493.add("Wheat");
 
 		cat01_pic494 = new Array<String>();
-		cat01_pic494.add("");
+		cat01_pic494.add("Clothing Line");
 
 		cat01_pic495 = new Array<String>();
-		cat01_pic495.add("");
+		cat01_pic495.add("Thong Sandal");
 
 		cat01_pic496 = new Array<String>();
-		cat01_pic496.add("");
+		cat01_pic496.add("Prosthetic Hand");
 
 		cat01_pic497 = new Array<String>();
-		cat01_pic497.add("");
+		cat01_pic497.add("Wrench");
 
 		cat01_pic498 = new Array<String>();
-		cat01_pic498.add("");
+		cat01_pic498.add("MacBook Pro");
 
 		cat01_pic499 = new Array<String>();
-		cat01_pic499.add("");
+		cat01_pic499.add("Chip Clips");
 
 		cat01_pic500 = new Array<String>();
-		cat01_pic500.add("");
+		cat01_pic500.add("Toy Frog");
 
 		cat01.put("pic0", cat01_pic00);
 		cat01.put("pic1", cat01_pic01);
