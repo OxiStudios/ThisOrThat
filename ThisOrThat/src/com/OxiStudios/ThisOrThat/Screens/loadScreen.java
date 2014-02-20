@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.TimeUtils;
 
 public class loadScreen implements Screen{
@@ -38,32 +39,29 @@ public class loadScreen implements Screen{
 		if(game.manager.update()) {
 			//loading is done
 			//assign objects
-			game.cat01       = game.manager.get("data/photo/cat01.pack");
-			
 			game.mainMenu    = game.manager.get("data/menu/menu.pack");
 			game.popUp       = game.manager.get("data/popUp/popUp.pack");
 			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
 			game.getReady    = game.manager.get("data/getReady/getReady.pack");
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
-			game.stats       = game.manager.get("data/stats/background.pack");
+			game.stats       = game.manager.get("data/statsbackground/background.pack");
 			
-			for(int i = 1; i<=23; i++) {
-				game.pictures.add(new TextureAtlas("data/photo/folder" + i + ".pack"));
+			for(int i = 0; i < 23; i++) {
+				game.pictures.add(new TextureAtlas("data/photo/folder" + Integer.toString((i + 1)) + ".pack"));
 			}
 
 			this.dispose();
 			game.setScreen(new MainMenu(game));
 			
 		}else{
-			currentPicture =  game.manager.getProgress();
-			Gdx.app.log("load", "" + currentPicture);
-			loadingSprite.set(loadingImage.createSprite("loading_bar" + 7));
+			currentPicture =  MathUtils.ceil(game.manager.getProgress() * 10);
+			if(currentPicture > 1 && currentPicture < 11) {
+				loadingSprite.set(loadingImage.createSprite("loading_bar" + (currentPicture - 1)));				
+			}
 			loadingSprite.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		}
 		
 		currentTime = TimeUtils.nanoTime();
-
-		Gdx.app.log("startTime", "" + startTime + " Current Time: " + currentTime);
 		
 	}
 
@@ -99,7 +97,7 @@ public class loadScreen implements Screen{
 		}
 		
 		if(loadingSprite == null) {
-			loadingSprite = loadingImage.createSprite("loading_bar" + 1);
+			loadingSprite = loadingImage.createSprite("loading_bar" + 1.0);
 			loadingSprite.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
@@ -108,11 +106,11 @@ public class loadScreen implements Screen{
 			background.setSize(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 		}
 		
-		game.manager.load("data/photo/cat01.pack", TextureAtlas.class);
 		game.manager.load("data/menu/menu.pack", TextureAtlas.class);
 		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
 		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
 		game.manager.load("data/getReady/getReady.pack", TextureAtlas.class);
+		game.manager.load("data/statsbackground/background.pack", TextureAtlas.class);
 		game.manager.load("data/popUp/popUp.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder1.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder2.pack", TextureAtlas.class);
@@ -137,7 +135,6 @@ public class loadScreen implements Screen{
 		game.manager.load("data/photo/folder21.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder22.pack", TextureAtlas.class);
 		game.manager.load("data/photo/folder23.pack", TextureAtlas.class);
-		game.manager.load("data/stats/background.pack", TextureAtlas.class);
 
 	}
 

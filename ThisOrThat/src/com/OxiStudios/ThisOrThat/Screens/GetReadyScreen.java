@@ -30,11 +30,11 @@ public class GetReadyScreen implements Screen {
 		background.draw(spriteBatch);
 		spriteBatch.end();
 		
-		if(currentTime - startTime >= 200000) {
+		if(currentTime >= 120) {
 			game.setScreen(new GameScreen(game));
 		}
 		
-		currentTime = TimeUtils.nanoTime();
+		currentTime += 1;
 	}
 
 	@Override
@@ -46,7 +46,7 @@ public class GetReadyScreen implements Screen {
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
-		startTime = TimeUtils.nanoTime();
+		currentTime = 0;
 		if (background == null) {
 			background = new Sprite(game.getReady.createSprite("getready"));
 			background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);

@@ -1,0 +1,82 @@
+
+folder23.jpg
+format: RGB565
+filter: Nearest,Nearest
+repeat: none
+pic490
+  rotate: false
+  xy: 1, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic491
+  rotate: false
+  xy: 1, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic492
+  rotate: false
+  xy: 643, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic493
+  rotate: false
+  xy: 643, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic494
+  rotate: false
+  xy: 1285, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic495
+  rotate: false
+  xy: 1285, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic496
+  rotate: false
+  xy: 1927, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic497
+  rotate: false
+  xy: 1927, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic498
+  rotate: false
+  xy: 2569, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic499
+  rotate: false
+  xy: 2569, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic500
+  rotate: false
+  xy: 3211, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1

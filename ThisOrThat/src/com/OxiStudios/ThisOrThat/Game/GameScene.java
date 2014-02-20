@@ -19,6 +19,8 @@ public class GameScene {
 	public Sprite background, correct, incorrect, popUpWindow, countDown, menu_sprite, retry_sprite;
 	private InputMultiplexer inputHanlder;
 	
+	String[] thousands, millions;
+	
 	public Timer timer;
 	
 	Stage stage;
@@ -33,7 +35,7 @@ public class GameScene {
 	
 	public double gameScore;
 	
-	Sound correctSound;
+	Sound correctSound, wrongSound;
 	
 	RandomPhoto randomPhoto;
 	
@@ -49,6 +51,9 @@ public class GameScene {
 	int pic01_num;
 	int pic02_num;
 	int count;
+	
+	int	folderbuf1;
+	int	folderbuf2;
 	
 	boolean oneIsRight;
 	boolean gotItRight;
@@ -85,6 +90,7 @@ public class GameScene {
 		incorrect.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		
 		correctSound = Gdx.audio.newSound(Gdx.files.internal("data/sounds/correct.wav"));
+		wrongSound   = Gdx.audio.newSound(Gdx.files.internal("data/sounds/loser.mp3"));
 		
 		spriteBatch = new SpriteBatch();
 		randomPhoto = new RandomPhoto();
@@ -94,9 +100,6 @@ public class GameScene {
 		timer = new Timer(game, this);
 		
 		widthForTime = game.font.getBounds(Double.toString(timer.gameTimer)).width;
-		
-		Gdx.app.log("Screen", "Width: " + game.SCREEN_WIDTH);
-		Gdx.app.log("Screen", "Height: " + game.SCREEN_HEIGHT);
 		
 		retryButtonListener  = new RetryButtonListener(game, this);
 		quitButtonListener   = new QuitButtonListener(game, this);
@@ -111,17 +114,18 @@ public class GameScene {
 		//stops from adding a lot of numbers to games played in the save file
 		getGamesPlayed = 0;
 		
-		pic01_catNum = 1;
-		pic02_catNum = 1;
+		pic01_catNum = MathUtils.random(21) + 1;
+		pic02_catNum = MathUtils.random(21) + 1;
 		
-		pic01_num    = randomPhoto.randomPic();
-		pic02_num    = randomPhoto.randomPic();
-		
-		count        = 3;
-		
-		while(pic01_num == pic02_num) {
-			pic02_num    = randomPhoto.randomPic();
+		while(pic01_catNum == pic02_catNum) {
+			pic02_catNum = MathUtils.random(21) + 1;
 		}
+		
+		folderbuf1 = (20 * (pic01_catNum - 1)) + 50;			
+		folderbuf2 = (20 * (pic02_catNum - 1)) + 50;
+		
+		pic01_num    = ((MathUtils.random(19)) + folderbuf1);
+		pic02_num    = ((MathUtils.random(19)) + folderbuf2);			
 
 		makeButtons();
 		makeTables();
@@ -180,6 +184,7 @@ public class GameScene {
 			//add one to total number of games played
 			getGamesPlayed++;
 			if(getGamesPlayed == 1){
+				wrongSound.play(1f);
 				game.savefile.gamesPlayed++;
 			}
 			
@@ -192,9 +197,13 @@ public class GameScene {
 		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.timer_position.x - widthForTime, game.timer_position.y);
 		game.font.draw(spriteBatch, Double.toString(this.gameScore), game.point_position.x, game.point_position.y);
 		if(game.TotalScore >= 1000.0) {
-			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000.0) + "K", game.score_position.x, game.score_position.y);
+			String string = Double.toString(game.TotalScore/1000.0);
+			thousands = string.split("\\.");
+			game.font.draw(spriteBatch, thousands[0] + "." + thousands[1].substring(0, 1) + "K", game.score_position.x, game.score_position.y);
 		}else if(game.TotalScore >= 1000000.0) {
-			game.font.draw(spriteBatch, Double.toString(game.TotalScore/1000000.0) + "M", game.score_position.x, game.score_position.y);
+			String string = Double.toString(game.TotalScore/1000000.0);
+			millions = string.split("\\.");
+			game.font.draw(spriteBatch, millions[0] + "." + millions[1].substring(0, 2) + "M", game.score_position.x, game.score_position.y);
 		}else{
 			game.font.draw(spriteBatch, Double.toString(game.TotalScore), game.score_position.x, game.score_position.y);
 		}
@@ -246,11 +255,12 @@ public class GameScene {
 	public void makeButtons() {
 		
 		//make the skin for the buttons
-		
-		Sprite picOne_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic01_num)));
-		Sprite picTwo_sprite = new Sprite(game.cat01.createSprite("pic" + Integer.toString(pic02_num)));
-		menu_sprite   = new Sprite(game.popUp.createSprite("MainMenu"));
-		retry_sprite  = new Sprite(game.popUp.createSprite("Retry"));
+		Gdx.app.log("picOne", "" + pic01_catNum + " Pic num: " + pic01_num);
+		Gdx.app.log("picTwo", "" + pic02_catNum + " Pic num: " + pic02_num);
+		Sprite picOne_sprite = new Sprite(game.pictures.get(pic01_catNum - 1).createSprite("pic" + Integer.toString(pic01_num)));
+		Sprite picTwo_sprite = new Sprite(game.pictures.get(pic02_catNum - 1).createSprite("pic" + Integer.toString(pic02_num)));
+		menu_sprite   = new Sprite(game.popUp.createSprite("quit"));
+		retry_sprite  = new Sprite(game.popUp.createSprite("retry"));
 		menu_sprite.setPosition(.3138f * game.SCREEN_WIDTH, .3958f * game.SCREEN_HEIGHT);
 		retry_sprite.setPosition(.3138f * game.SCREEN_WIDTH, .4671f * game.SCREEN_HEIGHT);
 		
@@ -275,31 +285,27 @@ public class GameScene {
 		picture_Two.setName("image_2");
 		
 		int rand = MathUtils.random(9);
-		ObjectMap<String, Array<String>> dict;
-		Array<String> randomWordArray;
+		ObjectMap<String, String> dict = game.dictionary.getDictionary(1);
 		
 		//get the dictionary for either the first pic or the second pic
 		if(rand < 5){
 			//if rand is 0-4 get the dictionary that the first pic is in
-			dict = game.dictionary.getDictionary(pic01_catNum);
 			//this will then make the first pic correct
 			oneIsRight = true;
 		}else{
 			//if rand is 5-9 get the dictionary that the second pic is in
-			dict = game.dictionary.getDictionary(pic02_catNum);
 			//this will then make the second pic correct
 			oneIsRight = false;
 		}
 		
 		if(oneIsRight){
-			randomWordArray = dict.get("pic" + Integer.toString(pic01_num));
+			this.randomWord = dict.get("pic" + Integer.toString(pic01_num));
+			Gdx.app.log("word", dict.get("pic" + Integer.toString(pic01_num)));
 		}else{
 			//second is correct so we need to get the a random word that matches pic two
-			randomWordArray = dict.get("pic" + Integer.toString(pic02_num));
+			Gdx.app.log("word", dict.get("pic" + Integer.toString(pic02_num)));
+			this.randomWord = dict.get("pic" + Integer.toString(pic02_num));
 		}
-		//get the random word from the array of words
-		//this.randomWord = randomWordArray.get(MathUtils.random(2));
-		this.randomWord = randomWordArray.get(0);
 		
 		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, oneIsRight));
 		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !oneIsRight));
@@ -310,6 +316,7 @@ public class GameScene {
 		skin.dispose();
 		spriteBatch.dispose();
 		correctSound.dispose();
+		wrongSound.dispose();
 	}
 
 }

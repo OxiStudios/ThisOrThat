@@ -14,7 +14,7 @@ public class StatsScreen implements Screen{
 	private ThisOrThatGame game;
 	SpriteBatch spriteBatch;
 	Sprite background;
-	String[] strings;
+	String[] strings, playTimeString;
 
 	public StatsScreen(ThisOrThatGame game) {
 		this.game = game;
@@ -36,23 +36,23 @@ public class StatsScreen implements Screen{
 		spriteBatch.begin();
 		background.draw(spriteBatch);
 		game.font.draw(spriteBatch, "Fastest Reponse", .1200f * game.SCREEN_WIDTH, .2343f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, "" + game.savefile.fastestReponse, .6000f * game.SCREEN_WIDTH, .2343f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, "" + "Coming Soon", .6000f * game.SCREEN_WIDTH, .2343f * game.SCREEN_HEIGHT);
 		
 		game.font.draw(spriteBatch, "Closest Time", .1200f * game.SCREEN_WIDTH, .3151f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, "" + game.savefile.closestTime, .6000f * game.SCREEN_WIDTH, .3151f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, "" + "Coming Soon", .6000f * game.SCREEN_WIDTH, .3151f * game.SCREEN_HEIGHT);
 		
 		game.font.draw(spriteBatch, "Correct In A Row", .1200f * game.SCREEN_WIDTH, .3968f * game.SCREEN_HEIGHT);
 		game.font.draw(spriteBatch, "" + (int)game.savefile.inARow, .6000f * game.SCREEN_WIDTH, .3968f * game.SCREEN_HEIGHT);
 		
 		game.font.draw(spriteBatch, "Longest Game", .1200f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, "" + strings[0] + "."+ strings[1] + " sec", .6000f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, "" + strings[0] + "." + strings[1].substring(0, 2) + " sec", .6000f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
 		
 		if(game.savefile.playTime/1000000000/60 >= 60) {
 			game.font.draw(spriteBatch, "Play Time", .1200f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);			
 			game.font.draw(spriteBatch,  "" + MathUtils.ceil(((game.savefile.playTime/1000000000.0f)/60.0f)/60.0f) + " mins", .6000f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);			
 		}else{
 			game.font.draw(spriteBatch, "Play Time", .1200f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);
-			game.font.draw(spriteBatch, "" + MathUtils.ceil((game.savefile.playTime/1000000000.0f)/60.0f) + " mins", .6000f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);
+			game.font.draw(spriteBatch, "" + playTimeString[0] + "." + playTimeString[1].subSequence(0, 2) + " mins", .6000f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);
 		}
 		game.font.draw(spriteBatch, "Games Played", .1200f * game.SCREEN_WIDTH, .6432f * game.SCREEN_HEIGHT);
 		game.font.draw(spriteBatch, "" + (int)game.savefile.gamesPlayed, .6000f * game.SCREEN_WIDTH, .6432f * game.SCREEN_HEIGHT);
@@ -80,7 +80,10 @@ public class StatsScreen implements Screen{
 		// TODO Auto-generated method stub
 		String string = Float.toString(game.savefile.longestGame/1000000000f);
 		strings = string.split("\\.");
-		Gdx.app.log("asdf", Float.toString(game.savefile.longestGame/1000000000f));
+		
+		String playString = Float.toString((game.savefile.playTime/1000000000.0f)/60.0f);
+		playTimeString = playString.split("\\.");
+		
 		
 		if(spriteBatch == null) {
 			spriteBatch = new SpriteBatch();

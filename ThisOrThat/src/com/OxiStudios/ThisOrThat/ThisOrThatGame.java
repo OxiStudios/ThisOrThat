@@ -56,10 +56,10 @@ public class ThisOrThatGame extends Game {
 		
 		word_position = new Vector2(SCREEN_WIDTH/2f, SCREEN_HEIGHT - .225f * SCREEN_HEIGHT);
 		point_position = new Vector2(.51f * SCREEN_WIDTH, .427f * SCREEN_HEIGHT);
-		score_position = new Vector2(.20f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
+		score_position = new Vector2(.21f * SCREEN_WIDTH, .96f * SCREEN_HEIGHT);
 		pic_two_position = new Vector2();
 		pic_one_position = new Vector2();
-		timer_position = new Vector2((.935f * SCREEN_WIDTH), .955f * SCREEN_HEIGHT);
+		timer_position = new Vector2((.930f * SCREEN_WIDTH), .955f * SCREEN_HEIGHT);
 		
 		gameScreenCount = 0;
 		TotalScore = 0;

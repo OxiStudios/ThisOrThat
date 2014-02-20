@@ -3,42 +3,42 @@ loading.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-loading_bar1
+loading_bar1.0
   rotate: false
   xy: 1, 1923
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar2
+loading_bar2.0
   rotate: false
   xy: 1, 1
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar3
+loading_bar3.0
   rotate: false
   xy: 1083, 1923
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar4
+loading_bar4.0
   rotate: false
   xy: 1083, 1
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar5
+loading_bar5.0
   rotate: false
   xy: 2165, 1923
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar6
+loading_bar6.0
   rotate: false
   xy: 2165, 1
   size: 1080, 1920
@@ -50,21 +50,21 @@ loading2.png
 format: RGBA8888
 filter: Nearest,Nearest
 repeat: none
-loading_bar7
+loading_bar7.0
   rotate: false
   xy: 1, 1
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar8
+loading_bar8.0
   rotate: false
   xy: 1083, 1
   size: 1080, 1920
   orig: 1080, 1920
   offset: 0, 0
   index: -1
-loading_bar9
+loading_bar9.0
   rotate: false
   xy: 2165, 1
   size: 1080, 1920

@@ -1,0 +1,145 @@
+
+folder16.jpg
+format: RGB565
+filter: Nearest,Nearest
+repeat: none
+pic350
+  rotate: false
+  xy: 1, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic351
+  rotate: false
+  xy: 1, 965
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic352
+  rotate: false
+  xy: 643, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic353
+  rotate: false
+  xy: 1, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic354
+  rotate: false
+  xy: 643, 965
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic355
+  rotate: false
+  xy: 1285, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic356
+  rotate: false
+  xy: 1, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic357
+  rotate: false
+  xy: 643, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic358
+  rotate: false
+  xy: 1285, 965
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic359
+  rotate: false
+  xy: 1927, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic360
+  rotate: false
+  xy: 643, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic361
+  rotate: false
+  xy: 1285, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic362
+  rotate: false
+  xy: 1927, 965
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic363
+  rotate: false
+  xy: 2569, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic364
+  rotate: false
+  xy: 1285, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic365
+  rotate: false
+  xy: 1927, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic366
+  rotate: false
+  xy: 2569, 965
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic367
+  rotate: false
+  xy: 3211, 1447
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic368
+  rotate: false
+  xy: 1927, 1
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
+pic369
+  rotate: false
+  xy: 2569, 483
+  size: 640, 480
+  orig: 640, 480
+  offset: 0, 0
+  index: -1
