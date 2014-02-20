@@ -9,6 +9,7 @@ import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.Array;
 
 public class ThisOrThatGame extends Game {
 	
@@ -22,7 +23,7 @@ public class ThisOrThatGame extends Game {
 	public TextureAtlas popUp;
 	public TextureAtlas getReady;
 	public TextureAtlas stats;
-	
+	public Array<TextureAtlas> pictures;
 	public int gameScreenCount;
 	
 	public AssetManager manager;
@@ -62,7 +63,7 @@ public class ThisOrThatGame extends Game {
 		
 		gameScreenCount = 0;
 		TotalScore = 0;
-		
+		pictures = new Array<TextureAtlas>();
 		dictionary  = new Dictionary();
 		popUp       = new TextureAtlas();
 		backgrounds = new TextureAtlas();
@@ -70,6 +71,9 @@ public class ThisOrThatGame extends Game {
 		getReady    = new TextureAtlas();
 		mainMenu    = new TextureAtlas();
 		stats       = new TextureAtlas();
+		
+
+			
 		
 	}
 
