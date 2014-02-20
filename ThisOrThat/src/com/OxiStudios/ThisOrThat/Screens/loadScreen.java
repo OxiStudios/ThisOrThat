@@ -46,6 +46,10 @@ public class loadScreen implements Screen{
 			game.getReady    = game.manager.get("data/getReady/getReady.pack");
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
 			game.stats       = game.manager.get("data/stats/background.pack");
+			
+			for(int i = 1; i<=23; i++) {
+				game.pictures.add(new TextureAtlas("data/photo/folder" + i + ".pack"));
+			}
 
 			this.dispose();
 			game.setScreen(new MainMenu(game));
@@ -105,13 +109,36 @@ public class loadScreen implements Screen{
 		}
 		
 		game.manager.load("data/photo/cat01.pack", TextureAtlas.class);
-		
 		game.manager.load("data/menu/menu.pack", TextureAtlas.class);
 		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
 		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
 		game.manager.load("data/getReady/getReady.pack", TextureAtlas.class);
 		game.manager.load("data/popUp/popUp.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder1.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder2.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder3.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder4.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder5.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder6.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder7.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder8.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder9.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder10.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder11.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder12.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder13.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder14.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder15.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder16.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder17.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder18.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder19.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder20.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder21.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder22.pack", TextureAtlas.class);
+		game.manager.load("data/photo/folder23.pack", TextureAtlas.class);
 		game.manager.load("data/stats/background.pack", TextureAtlas.class);
+
 	}
 
 	@Override
