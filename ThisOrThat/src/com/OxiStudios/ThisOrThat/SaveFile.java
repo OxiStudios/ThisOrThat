@@ -5,61 +5,60 @@ import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.Array;
 
 public class SaveFile {
-	
-	//highest score, done
+
+	// highest score, done
 	public float highScore;
-	
-	//amount of time played in the game in seconds, done
+
+	// amount of time played in the game in seconds, done
 	public float playTime;
-	
-	//highest amount that the player got in a row, done
+
+	// highest amount that the player got in a row, done
 	public float inARow;
-	
-	//closest time to 2 seconds it took them to respond
+
+	// closest time to 2 seconds it took them to respond
 	public float fastestReponse;
-	
-	//closest time to losing
+
+	// closest time to losing
 	public float closestTime;
-	
-	//longest game they have played, donoe
+
+	// longest game they have played, donoe
 	public float longestGame;
-	
-	//total amount of games played, done
+
+	// total amount of games played, done
 	public float gamesPlayed;
-	
+
 	FileHandle file;
-	
+
 	String readFile;
-	
+
 	String[] strings;
-	
+
 	public SaveFile() {
 		load();
 	}
-	
+
 	private void load() {
-		if(!Gdx.files.local("/ThisOrThat/save.save").exists()) {
-			this.file = Gdx.files.local("/ThisOrThat/save.save");
-			save();
+		
+		if(!Gdx.files.local("save.save").exists()) {
+			file = Gdx.files.local("save.save");			
 		}else{
-			file = Gdx.files.local("/ThisOrThat/save.save");
-			
+			file = Gdx.files.local("save.save");
 			readFile = file.readString();
 			strings = readFile.split(",");
 			
-			gamesPlayed    = Float.parseFloat(strings[0]);
-			longestGame    = Float.parseFloat(strings[1]);
-			closestTime    = Float.parseFloat(strings[2]);
+			gamesPlayed = Float.parseFloat(strings[0]);
+			longestGame = Float.parseFloat(strings[1]);
+			closestTime = Float.parseFloat(strings[2]);
 			fastestReponse = Float.parseFloat(strings[3]);
-			inARow         = Float.parseFloat(strings[4]);
-			playTime       = Float.parseFloat(strings[5]);
-			highScore      = Float.parseFloat(strings[6]);
-			
+			inARow = Float.parseFloat(strings[4]);
+			playTime = Float.parseFloat(strings[5]);
+			highScore = Float.parseFloat(strings[6]);			
 		}
+
 	}
-	
+
 	public void save() {
-		//save the game files
+		// save the game files
 		file.writeString(Float.toString(gamesPlayed) + ",", false);
 		file.writeString(Float.toString(longestGame) + ",", true);
 		file.writeString(Float.toString(closestTime) + ",", true);
@@ -67,9 +66,9 @@ public class SaveFile {
 		file.writeString(Float.toString(inARow) + ",", true);
 		file.writeString(Float.toString(playTime) + ",", true);
 		file.writeString(Float.toString(highScore) + ",", true);
-		
+
 		Gdx.app.log("save", "file has been saved");
-		
+
 	}
 
 }

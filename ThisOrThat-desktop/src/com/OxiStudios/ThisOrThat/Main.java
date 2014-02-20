@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 

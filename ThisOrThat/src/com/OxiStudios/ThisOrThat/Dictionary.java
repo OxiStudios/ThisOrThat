@@ -83,7 +83,7 @@ public class Dictionary {
 		cat01.put("pic55", "Poverty");
 		cat01.put("pic56", "Pedestrians");
 		cat01.put("pic57", "Microphone");
-		cat01.put("pic58", "Goths");
+		cat01.put("pic58", "Black Jackets");
 		cat01.put("pic59", "Roofing");
 		cat01.put("pic60", "Hippie");
 		cat01.put("pic61", "Runners");

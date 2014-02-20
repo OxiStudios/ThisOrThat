@@ -187,10 +187,6 @@ public class GameScene {
 				wrongSound.play(1f);
 				game.savefile.gamesPlayed++;
 			}
-			
-			//stats have been updated, save the file
-			game.savefile.save();
-			
 		}
 		
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);

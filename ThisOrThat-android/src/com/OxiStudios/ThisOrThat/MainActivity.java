@@ -2,6 +2,7 @@ package com.OxiStudios.ThisOrThat;
 
 import android.os.Bundle;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.backends.android.AndroidApplication;
 import com.badlogic.gdx.backends.android.AndroidApplicationConfiguration;
 

@@ -23,10 +23,16 @@ public class ThisOrThatGame extends Game {
 	public TextureAtlas popUp;
 	public TextureAtlas getReady;
 	public TextureAtlas stats;
+	
+	public TextureAtlas folder1,folder2, folder3, folder4, folder5, folder6, folder7, folder8, folder9, folder10, folder11, folder12, folder13, folder14;
 	public Array<TextureAtlas> pictures;
+	
 	public int gameScreenCount;
 	
 	public AssetManager manager;
+	public AssetManager manager2;
+	public AssetManager manager3;
+	public AssetManager manager4;
 	
 	public Vector2 word_position, point_position, score_position, pic_one_position, pic_two_position, timer_position;
 	
@@ -50,7 +56,10 @@ public class ThisOrThatGame extends Game {
 		font.setColor(Color.BLUE);
 		font.getRegion().getTexture().setFilter(TextureFilter.Linear, TextureFilter.Linear);
 		
-		manager = new AssetManager();
+		manager  = new AssetManager();
+		manager2 = new AssetManager();
+		manager3 = new AssetManager();
+		manager4 = new AssetManager();
 		
 		setScreen(new loadScreen(this));
 		
@@ -72,6 +81,20 @@ public class ThisOrThatGame extends Game {
 		mainMenu    = new TextureAtlas();
 		stats       = new TextureAtlas();
 		
+		folder1 = new TextureAtlas();
+		folder2 = new TextureAtlas();
+		folder3 = new TextureAtlas();
+		folder4 = new TextureAtlas();
+		folder5 = new TextureAtlas();
+		folder6 = new TextureAtlas();
+		folder7 = new TextureAtlas();
+		folder8 = new TextureAtlas();
+		folder9 = new TextureAtlas();
+		folder10 = new TextureAtlas();
+		folder11 = new TextureAtlas();
+		folder12 = new TextureAtlas();
+		folder13 = new TextureAtlas();
+		folder14 = new TextureAtlas();
 
 			
 		
@@ -79,7 +102,26 @@ public class ThisOrThatGame extends Game {
 
 	@Override
 	public void dispose() {
-		
+		manager.unload("data/menu/menu.pack");
+		manager.unload("data/backgrounds/backgrounds.pack");
+		manager.unload("data/fonts/mainFont.fnt");
+		manager.unload("data/getReady/getReady.pack");
+		manager.unload("data/statsbackground/background.pack");
+		manager.unload("data/popUp/popUp.pack");
+		manager.unload("data/photo/folder1.pack");
+		manager.unload("data/photo/folder2.pack");
+		manager.unload("data/photo/folder3.pack");
+		manager.unload("data/photo/folder4.pack");
+		manager.unload("data/photo/folder5.pack");
+		manager.unload("data/photo/folder6.pack");
+		manager.unload("data/photo/folder7.pack");
+		manager.unload("data/photo/folder8.pack");
+		manager.unload("data/photo/folder9.pack");
+		manager.unload("data/photo/folder10.pack");
+		manager.unload("data/photo/folder11.pack");
+		manager.unload("data/photo/folder12.pack");
+		manager.unload("data/photo/folder13.pack");
+		manager.unload("data/photo/folder14.pack");
 	}
 
 	@Override

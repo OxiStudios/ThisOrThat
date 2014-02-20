@@ -41,6 +41,8 @@ public class RetryButtonListener implements InputProcessor{
 				if(screenY > (.4791f * game.SCREEN_HEIGHT) && screenY < (.5312f * game.SCREEN_HEIGHT)){
 					Gdx.app.log("Screen", "Retry button clicked");
 					game.TotalScore = 0;
+					//stats have been updated, save the file
+					game.savefile.save();
 					game.setScreen(new GameScreen(game));
 				}
 				

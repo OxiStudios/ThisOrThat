@@ -3,6 +3,7 @@ package com.OxiStudios.ThisOrThat;
 import org.robovm.cocoatouch.foundation.NSAutoreleasePool;
 import org.robovm.cocoatouch.uikit.UIApplication;
 
+import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplication;
 import com.badlogic.gdx.backends.iosrobovm.IOSApplicationConfiguration;
 
