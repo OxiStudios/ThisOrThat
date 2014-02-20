@@ -14,6 +14,7 @@ public class StatsScreen implements Screen{
 	private ThisOrThatGame game;
 	SpriteBatch spriteBatch;
 	Sprite background;
+	String[] strings;
 
 	public StatsScreen(ThisOrThatGame game) {
 		this.game = game;
@@ -41,10 +42,10 @@ public class StatsScreen implements Screen{
 		game.font.draw(spriteBatch, "" + game.savefile.closestTime, .6000f * game.SCREEN_WIDTH, .3151f * game.SCREEN_HEIGHT);
 		
 		game.font.draw(spriteBatch, "Correct In A Row", .1200f * game.SCREEN_WIDTH, .3968f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, "" + game.savefile.inARow, .6000f * game.SCREEN_WIDTH, .3968f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, "" + (int)game.savefile.inARow, .6000f * game.SCREEN_WIDTH, .3968f * game.SCREEN_HEIGHT);
 		
 		game.font.draw(spriteBatch, "Longest Game", .1200f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
-		game.font.draw(spriteBatch, "" + game.savefile.longestGame/1000000000, .6000f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
+		game.font.draw(spriteBatch, "" + strings[0] + "."+ strings[1] + " sec", .6000f * game.SCREEN_WIDTH, .4817f * game.SCREEN_HEIGHT);
 		
 		if(game.savefile.playTime/1000000000/60 >= 60) {
 			game.font.draw(spriteBatch, "Play Time", .1200f * game.SCREEN_WIDTH, .5625f * game.SCREEN_HEIGHT);			
@@ -77,6 +78,9 @@ public class StatsScreen implements Screen{
 	@Override
 	public void show() {
 		// TODO Auto-generated method stub
+		strings = Float.toString(game.savefile.longestGame/1000000000f).split(".");
+		Gdx.app.log("asdf", Float.toString(game.savefile.longestGame/1000000000f));
+		
 		if(spriteBatch == null) {
 			spriteBatch = new SpriteBatch();
 		}
