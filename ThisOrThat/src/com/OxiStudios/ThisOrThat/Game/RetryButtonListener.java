@@ -43,6 +43,7 @@ public class RetryButtonListener implements InputProcessor{
 					game.TotalScore = 0;
 					//stats have been updated, save the file
 					game.savefile.save();
+					game.random.QueueNext();
 					game.setScreen(new GameScreen(game));
 				}
 				

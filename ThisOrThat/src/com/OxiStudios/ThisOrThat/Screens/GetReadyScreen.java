@@ -1,7 +1,9 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
+import com.OxiStudios.ThisOrThat.BackButton;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.Game.GameScreen;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -12,6 +14,8 @@ public class GetReadyScreen implements Screen {
 	Sprite background;
 	boolean switchScreen;
 	private ThisOrThatGame game;
+	
+	private BackButton back;
 
 	private SpriteBatch spriteBatch;
 	
@@ -20,6 +24,10 @@ public class GetReadyScreen implements Screen {
 
 	public GetReadyScreen(ThisOrThatGame game) {
 		this.game = game;
+		Gdx.input.setCatchBackKey(true);
+		back = new BackButton(game);
+		back.isMainMenu(false);
+		Gdx.input.setInputProcessor(back);
 	}
 
 	@Override

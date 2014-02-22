@@ -1,23 +1,21 @@
 package com.OxiStudios.ThisOrThat.Game;
 
+import com.OxiStudios.ThisOrThat.BackButton;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.InputMultiplexer;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.ImageButton;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.utils.Array;
-import com.badlogic.gdx.utils.ObjectMap;
 
 public class GameScene {
 	
 	public Sprite background, correct, incorrect, popUpWindow, countDown, menu_sprite, retry_sprite;
-	private InputMultiplexer inputHanlder;
 	
 	String[] thousands, millions;
 	
@@ -32,36 +30,30 @@ public class GameScene {
 	
 	private RetryButtonListener retryButtonListener;
 	private QuitButtonListener quitButtonListener;
+	private BackButton back;
 	
 	public double gameScore;
 	
 	Sound correctSound, wrongSound;
 	
-	RandomPhoto randomPhoto;
-	
 	float widthForTime;
-	float getGamesPlayed;
+	float setGamesPlayed;
 	
 	String randomWord;
 	String picOne_Name;
 	String picTwo_Name;
 	
-	int pic01_catNum;
-	int pic02_catNum;
-	int pic01_num;
-	int pic02_num;
 	int count;
 	
-	int	folderbuf1;
-	int	folderbuf2;
-	
-	boolean oneIsRight;
 	boolean gotItRight;
 	boolean gotItWrong;
 	boolean newScreen;
 	boolean popUp;
 	boolean startTimer;
+	boolean notTouchable;
 	private ThisOrThatGame game;
+
+	private InputMultiplexer inputHandler;
 	
 	
 	public GameScene(ThisOrThatGame game) {
@@ -93,7 +85,6 @@ public class GameScene {
 		wrongSound   = Gdx.audio.newSound(Gdx.files.internal("data/sounds/loser.mp3"));
 		
 		spriteBatch = new SpriteBatch();
-		randomPhoto = new RandomPhoto();
 		
 		gameScore = 750.0;
 		
@@ -103,29 +94,21 @@ public class GameScene {
 		
 		retryButtonListener  = new RetryButtonListener(game, this);
 		quitButtonListener   = new QuitButtonListener(game, this);
-		inputHanlder   = new InputMultiplexer();
+		back                 = new BackButton(game);
 		
-
-		inputHanlder.addProcessor(quitButtonListener);
-		inputHanlder.addProcessor(retryButtonListener);
-		inputHanlder.addProcessor(stage);
-		Gdx.input.setInputProcessor(inputHanlder);
+		Gdx.input.setCatchBackKey(true);
+		inputHandler = new InputMultiplexer();
+		
+		inputHandler.addProcessor(quitButtonListener);
+		inputHandler.addProcessor(retryButtonListener);
+		inputHandler.addProcessor(stage);
+		back.isMainMenu(false);
+		inputHandler.addProcessor(back);
+		
+		Gdx.input.setInputProcessor(inputHandler);
 		
 		//stops from adding a lot of numbers to games played in the save file
-		getGamesPlayed = 0;
-		
-		pic01_catNum = MathUtils.random(13) + 1;
-		pic02_catNum = MathUtils.random(13) + 1;
-		
-		while(pic01_catNum == pic02_catNum) {
-			pic02_catNum = MathUtils.random(13) + 1;
-		}
-		
-		folderbuf1 = (20 * (pic01_catNum - 1)) + 50;			
-		folderbuf2 = (20 * (pic02_catNum - 1)) + 50;
-		
-		pic01_num    = ((MathUtils.random(19)) + folderbuf1);
-		pic02_num    = ((MathUtils.random(19)) + folderbuf2);			
+		setGamesPlayed = 0;			
 
 		makeButtons();
 		makeTables();
@@ -171,6 +154,7 @@ public class GameScene {
 		if(gotItWrong) {
 			incorrect.draw(spriteBatch);
 			popUp = true;
+			notTouchable = true;
 			//check if they got a new highest right in a row
 			if(game.gameScreenCount >= game.savefile.inARow) {
 				game.savefile.inARow = game.gameScreenCount;
@@ -182,8 +166,8 @@ public class GameScene {
 			}
 			
 			//add one to total number of games played
-			getGamesPlayed++;
-			if(getGamesPlayed == 1){
+			setGamesPlayed++;
+			if(setGamesPlayed == 1){
 				wrongSound.play(1f);
 				game.savefile.gamesPlayed++;
 			}
@@ -210,7 +194,6 @@ public class GameScene {
 		stage.act();
 		
 		spriteBatch.begin();
-		
 		if(popUp) {
 			gotItWrong = false;
 			
@@ -251,10 +234,8 @@ public class GameScene {
 	public void makeButtons() {
 		
 		//make the skin for the buttons
-		Gdx.app.log("picOne", "" + pic01_catNum + " Pic num: " + pic01_num);
-		Gdx.app.log("picTwo", "" + pic02_catNum + " Pic num: " + pic02_num);
-		Sprite picOne_sprite = new Sprite(game.pictures.get(pic01_catNum - 1).createSprite("pic" + Integer.toString(pic01_num)));
-		Sprite picTwo_sprite = new Sprite(game.pictures.get(pic02_catNum - 1).createSprite("pic" + Integer.toString(pic02_num)));
+		Sprite picOne_sprite = new Sprite(game.random.getPic1());
+		Sprite picTwo_sprite = new Sprite(game.random.getPic2());
 		menu_sprite   = new Sprite(game.popUp.createSprite("quit"));
 		retry_sprite  = new Sprite(game.popUp.createSprite("retry"));
 		menu_sprite.setPosition(.3138f * game.SCREEN_WIDTH, .3958f * game.SCREEN_HEIGHT);
@@ -266,8 +247,8 @@ public class GameScene {
 		picTwo_sprite.setSize(.59f * game.SCREEN_WIDTH, .25f * game.SCREEN_HEIGHT);
 		
 		
-		skin.add("image_1", picOne_sprite);
-		skin.add("image_2", picTwo_sprite);
+		skin.add("image_1", picOne_sprite, Sprite.class);
+		skin.add("image_2", picTwo_sprite, Sprite.class);
 		
 		//make the buttons and link them with the styles
 		picture_One = new ImageButton(skin.newDrawable("image_1"));
@@ -280,31 +261,10 @@ public class GameScene {
 		picture_One.setName("image_1");
 		picture_Two.setName("image_2");
 		
-		int rand = MathUtils.random(9);
-		ObjectMap<String, String> dict = game.dictionary.getDictionary(1);
+		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, game.random.getCorrect()));
+		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !game.random.getCorrect()));
 		
-		//get the dictionary for either the first pic or the second pic
-		if(rand < 5){
-			//if rand is 0-4 get the dictionary that the first pic is in
-			//this will then make the first pic correct
-			oneIsRight = true;
-		}else{
-			//if rand is 5-9 get the dictionary that the second pic is in
-			//this will then make the second pic correct
-			oneIsRight = false;
-		}
-		
-		if(oneIsRight){
-			this.randomWord = dict.get("pic" + Integer.toString(pic01_num));
-			Gdx.app.log("word", dict.get("pic" + Integer.toString(pic01_num)));
-		}else{
-			//second is correct so we need to get the a random word that matches pic two
-			Gdx.app.log("word", dict.get("pic" + Integer.toString(pic02_num)));
-			this.randomWord = dict.get("pic" + Integer.toString(pic02_num));
-		}
-		
-		picture_One.addListener(new ButtonListener(game, this, picture_One, timer, oneIsRight));
-		picture_Two.addListener(new ButtonListener(game, this, picture_Two, timer, !oneIsRight));
+		this.randomWord = game.random.getWord();
 	}
 	
 	public void dispose() {

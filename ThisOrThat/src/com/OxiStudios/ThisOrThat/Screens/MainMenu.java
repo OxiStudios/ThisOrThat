@@ -1,5 +1,6 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
+import com.OxiStudios.ThisOrThat.BackButton;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.MainMenuButtonListeners.PlayListener;
 import com.OxiStudios.ThisOrThat.MainMenuButtonListeners.StatsListener;
@@ -18,6 +19,7 @@ public class MainMenu implements Screen{
 	InputMultiplexer inputHanlder;
 	PlayListener playListener;
 	StatsListener statsListener;
+	BackButton back;
 
 	private ThisOrThatGame game;
 	
@@ -60,10 +62,17 @@ public class MainMenu implements Screen{
 			statsListener = new StatsListener(game);
 		}
 		
+		if(back == null) {
+			back = new BackButton(game);
+		}
+		
 		if(inputHanlder == null) {
+			Gdx.input.setCatchBackKey(true);
 			inputHanlder = new InputMultiplexer();
 			inputHanlder.addProcessor(playListener);
 			inputHanlder.addProcessor(statsListener);
+			back.isMainMenu(true);
+			inputHanlder.addProcessor(back);
 			Gdx.input.setInputProcessor(inputHanlder);
 		}
 	}

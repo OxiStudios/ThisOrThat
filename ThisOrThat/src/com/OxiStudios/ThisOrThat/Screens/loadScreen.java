@@ -36,7 +36,7 @@ public class loadScreen implements Screen{
 		background.draw(batch);
 		loadingSprite.draw(batch);
 		batch.end();
-		if(game.manager.update() && game.manager2.update() && game.manager3.update() && game.manager4.update()) {
+		if(game.manager.update() && game.manager2.update()) {
 			//loading is done
 			//assign objects
 			game.mainMenu    = game.manager.get("data/menu/menu.pack");
@@ -44,43 +44,12 @@ public class loadScreen implements Screen{
 			game.backgrounds = game.manager.get("data/backgrounds/backgrounds.pack");
 			game.getReady    = game.manager2.get("data/getReady/getReady.pack");
 			game.font        = game.manager.get("data/fonts/mainFont.fnt");
-			game.stats       = game.manager2.get("data/statsbackground/background.pack");
-			
-			game.folder1  = game.manager3.get("data/photo/folder1.pack");
-			game.folder2  = game.manager3.get("data/photo/folder2.pack");
-			game.folder3  = game.manager3.get("data/photo/folder3.pack");
-			game.folder4  = game.manager3.get("data/photo/folder4.pack");
-			game.folder5  = game.manager3.get("data/photo/folder5.pack");
-			game.folder6  = game.manager3.get("data/photo/folder6.pack");
-			game.folder7  = game.manager3.get("data/photo/folder7.pack");
-			game.folder8  = game.manager4.get("data/photo/folder8.pack");
-			game.folder9  = game.manager4.get("data/photo/folder9.pack");
-			game.folder10 = game.manager4.get("data/photo/folder10.pack");
-			game.folder11 = game.manager4.get("data/photo/folder11.pack");
-			game.folder12 = game.manager4.get("data/photo/folder12.pack");
-			game.folder13 = game.manager4.get("data/photo/folder13.pack");
-			game.folder14 = game.manager4.get("data/photo/folder14.pack");
-			
-			game.pictures.add(game.folder1);
-			game.pictures.add(game.folder2);
-			game.pictures.add(game.folder3);
-			game.pictures.add(game.folder4);
-			game.pictures.add(game.folder5);
-			game.pictures.add(game.folder6);
-			game.pictures.add(game.folder7);
-			game.pictures.add(game.folder8);
-			game.pictures.add(game.folder9);
-			game.pictures.add(game.folder10);
-			game.pictures.add(game.folder11);
-			game.pictures.add(game.folder12);
-			game.pictures.add(game.folder13);
-			game.pictures.add(game.folder14);
 			
 			game.setScreen(new MainMenu(game));
 			this.dispose();
 			
 		}else{
-			currentPicture =  MathUtils.ceil(game.manager3.getProgress() * 10);
+			currentPicture =  MathUtils.ceil(((game.manager2.getProgress() + game.manager.getProgress()) / 2) * 10);
 			if(currentPicture > 1 && currentPicture < 11) {
 				loadingSprite.set(loadingImage.createSprite("loading_bar" + (currentPicture - 1)));				
 			}
@@ -136,22 +105,7 @@ public class loadScreen implements Screen{
 		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
 		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
 		game.manager2.load("data/getReady/getReady.pack", TextureAtlas.class);
-		game.manager2.load("data/statsbackground/background.pack", TextureAtlas.class);
 		game.manager2.load("data/popUp/popUp.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder1.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder2.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder3.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder4.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder5.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder6.pack", TextureAtlas.class);
-		game.manager3.load("data/photo/folder7.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder8.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder9.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder10.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder11.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder12.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder13.pack", TextureAtlas.class);
-		game.manager4.load("data/photo/folder14.pack", TextureAtlas.class);
 
 	}
 
@@ -164,13 +118,21 @@ public class loadScreen implements Screen{
 	@Override
 	public void pause() {
 		// TODO Auto-generated method stub
-		
+		game.manager.unload("data/menu/menu.pack");
+		game.manager.unload("data/backgrounds/backgrounds.pack");
+		game.manager.unload("data/fonts/mainFont.fnt");
+		game.manager2.unload("data/getReady/getReady.pack");
+		game.manager2.unload("data/popUp/popUp.pack");
 	}
 
 	@Override
 	public void resume() {
 		// TODO Auto-generated method stub
-		
+		game.manager.load("data/menu/menu.pack", TextureAtlas.class);
+		game.manager.load("data/backgrounds/backgrounds.pack", TextureAtlas.class);
+		game.manager.load("data/fonts/mainFont.fnt", BitmapFont.class);
+		game.manager2.load("data/getReady/getReady.pack", TextureAtlas.class);
+		game.manager2.load("data/popUp/popUp.pack", TextureAtlas.class);
 	}
 
 	@Override

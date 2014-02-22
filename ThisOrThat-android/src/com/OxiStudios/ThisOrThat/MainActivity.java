@@ -22,7 +22,13 @@ public class MainActivity extends AndroidApplication {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
+        AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
+        cfg.useGL20 = true;
+        cfg.r = cfg.g = cfg.b = cfg.a = 8;
+        cfg.depth = 16;
+        cfg.stencil = 0;
         
+        cfg.useAccelerometer = false;
         
         // Create the layout
         RelativeLayout layout = new RelativeLayout(this);
@@ -34,7 +40,7 @@ public class MainActivity extends AndroidApplication {
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN);
 
         // Create the libgdx View
-        View gameView = initializeForView(new ThisOrThatGame(), false);
+        View gameView = initializeForView(new ThisOrThatGame(), cfg);
 
         // Create and setup the AdMob view
         AdView adView = new AdView(this);
@@ -61,9 +67,7 @@ public class MainActivity extends AndroidApplication {
         setContentView(layout);
         
         
-//        AndroidApplicationConfiguration cfg = new AndroidApplicationConfiguration();
-//        cfg.useGL20 = false;
-//        cfg.useAccelerometer = true;
+        
 //        
 //        initialize(new ThisOrThatGame(), cfg);
     }

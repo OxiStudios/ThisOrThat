@@ -26,9 +26,10 @@ public class ButtonListener extends InputListener{
 	
 	public boolean touchDown (InputEvent event, float x, float y, int pointer, int button) {
          Gdx.app.log("ImageButton", "Button:" + imageButton.getName());
-         if(timer.gameTimer > 0 && isCorrect && !hasBeenClicked) {
+         if(timer.gameTimer > 0 && isCorrect && !hasBeenClicked && !gameScene.notTouchable) {
         	 
         	 //the player got it right!
+        	 game.random.QueueNext();
         	 gameScene.gotItRight = true;
         	 game.TotalScore += gameScene.gameScore;
         	 

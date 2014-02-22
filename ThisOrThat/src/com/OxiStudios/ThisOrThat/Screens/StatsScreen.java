@@ -1,10 +1,12 @@
 package com.OxiStudios.ThisOrThat.Screens;
 
+import com.OxiStudios.ThisOrThat.BackButton;
 import com.OxiStudios.ThisOrThat.ThisOrThatGame;
 import com.OxiStudios.ThisOrThat.MainMenuButtonListeners.BackButtonListener;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.InputMultiplexer;
 import com.badlogic.gdx.Screen;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.MathUtils;
@@ -15,11 +17,21 @@ public class StatsScreen implements Screen{
 	SpriteBatch spriteBatch;
 	Sprite background;
 	String[] strings, playTimeString;
+	
+	BackButton back;
+	InputMultiplexer inputHandler;
 
 	public StatsScreen(ThisOrThatGame game) {
 		this.game = game;
-		Gdx.input.setInputProcessor(new BackButtonListener(game));
 		
+		Gdx.input.setCatchBackKey(true);
+		inputHandler = new InputMultiplexer();
+		inputHandler.addProcessor(new BackButtonListener(game));
+		back = new BackButton(game);
+		back.isMainMenu(false);
+		inputHandler.addProcessor(back);
+		
+		Gdx.input.setInputProcessor(inputHandler);
 		if(game.SCREEN_WIDTH >= 1080) {
 			game.font.setScale(2.5f);
 		}else if(game.SCREEN_WIDTH >= 720){
@@ -115,7 +127,7 @@ public class StatsScreen implements Screen{
 		}
 		
 		if(background == null) {
-			background = new Sprite(game.stats.createSprite("background"));
+			background = new Sprite(new Texture(Gdx.files.internal("data/statsbackground/stats_background.png")));
 			background.setSize(game.SCREEN_WIDTH, game.SCREEN_HEIGHT);
 		}
 	}
