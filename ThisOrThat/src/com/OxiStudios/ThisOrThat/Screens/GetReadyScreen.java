@@ -39,6 +39,7 @@ public class GetReadyScreen implements Screen {
 		spriteBatch.end();
 		
 		if(currentTime >= 120) {
+			game.random.QueueNext();
 			game.setScreen(new GameScreen(game));
 		}
 		

@@ -38,8 +38,8 @@ public class RandomPhoto {
 	// gets called for queue pictures
 	private void randomPic() {
 		
-		pic01_num = MathUtils.random(442) + 51;
-		pic02_num = MathUtils.random(442) + 51;
+		pic01_num = MathUtils.random(499) + 1;
+		pic02_num = MathUtils.random(499) + 1;
 
 		while (pic01_num == pic02_num) {
 			pic02_num = MathUtils.random(499) + 1;
