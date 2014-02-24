@@ -173,6 +173,12 @@ public class GameScene {
 			}
 		}
 		
+		spriteBatch.end();
+		
+		stage.draw();
+		
+		spriteBatch.begin();
+		
 		game.font.draw(spriteBatch, randomWord, game.word_position.x - game.font.getBounds(randomWord).width/2, game.word_position.y);
 		game.font.draw(spriteBatch, Double.toString(timer.getTimer()), game.timer_position.x - widthForTime, game.timer_position.y);
 		game.font.draw(spriteBatch, Double.toString(this.gameScore), game.point_position.x, game.point_position.y);
@@ -190,7 +196,7 @@ public class GameScene {
 		
 		spriteBatch.end();
 
-		stage.draw();
+		
 		stage.act();
 		
 		spriteBatch.begin();

@@ -60,8 +60,17 @@ public class RandomPhoto {
 		randomPic();
 		
 		//set queued sprites to the ready sprites 
-		ready_1 = new Sprite(new Texture(Gdx.files.internal(location + pic01_num + ".jpg")));
-		ready_2 = new Sprite(new Texture(Gdx.files.internal(location + pic02_num + ".jpg")));
+		if(pic01_num <= 49) {
+			ready_1 = new Sprite(new Texture(Gdx.files.internal(location + pic01_num + ".png")));			
+		}else{
+			ready_1 = new Sprite(new Texture(Gdx.files.internal(location + pic01_num + ".jpg")));			
+		}
+		
+		if(pic02_num <= 49){
+			ready_2 = new Sprite(new Texture(Gdx.files.internal(location + pic02_num + ".png")));
+		}else{
+			ready_2 = new Sprite(new Texture(Gdx.files.internal(location + pic02_num + ".jpg")));			
+		}
 		
 		int rand = MathUtils.random(9);
 		ObjectMap<String, String> dict = game.dictionary.getDictionary(1);
