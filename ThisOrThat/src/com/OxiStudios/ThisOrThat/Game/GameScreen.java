@@ -9,9 +9,11 @@ public class GameScreen implements Screen{
 	
 	GameScene gameScene;
 	private ThisOrThatGame game;
+	private boolean hardcore;
 	
-	public GameScreen(ThisOrThatGame game) {
+	public GameScreen(ThisOrThatGame game, boolean hardcore) {
 		this.game = game;
+		this.hardcore = hardcore;
 	}
 
 	@Override
@@ -34,7 +36,7 @@ public class GameScreen implements Screen{
 	public void show() {
 		// TODO Auto-generated method stub
 		if(gameScene == null) {
-			gameScene = new GameScene(game);
+			gameScene = new GameScene(game, hardcore);
 		}
 	}
 

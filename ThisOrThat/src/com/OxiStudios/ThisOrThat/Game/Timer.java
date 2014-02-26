@@ -12,12 +12,18 @@ public class Timer {
 	
 	private boolean outOfTime;
 	private ThisOrThatGame game;
+	private boolean hardcore;
 	
-	public Timer(ThisOrThatGame game, GameScene gameScene) {
+	public Timer(ThisOrThatGame game, GameScene gameScene, boolean hardcore) {
 		this.game      = game;
 		this.gameScene = gameScene;
+		this.hardcore  = hardcore;
 		
-		gameTimer = 2.0 * 1000; //2 seconds
+		if(hardcore){
+			gameTimer = 1.2 * 1000; //1.2 seconds			
+		}else{
+			gameTimer = 2.2 * 1000; //1.2 seconds	
+		}
 		
 		outOfTime = false;
 		

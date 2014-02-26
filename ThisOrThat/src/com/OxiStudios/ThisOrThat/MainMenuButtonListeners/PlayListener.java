@@ -40,7 +40,7 @@ public class PlayListener implements InputProcessor{
 		Gdx.app.log("position", "" + .3255f * game.SCREEN_HEIGHT);
 		if(screenX > (.2759f * game.SCREEN_WIDTH) && screenX < ((.2759f * game.SCREEN_WIDTH) + (.4490 * game.SCREEN_WIDTH))) {
 			if(screenY > (.5921f * game.SCREEN_HEIGHT) && screenY < (.6734f * game.SCREEN_HEIGHT)) {
-				game.setScreen(new GetReadyScreen(game));
+				game.setScreen(new GetReadyScreen(game, true));
 				game.startGameTime = TimeUtils.nanoTime();
 			}
 		}

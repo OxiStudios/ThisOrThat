@@ -21,9 +21,11 @@ public class GetReadyScreen implements Screen {
 	
 	float currentTime;
 	float startTime;
+	private boolean hardcore;
 
-	public GetReadyScreen(ThisOrThatGame game) {
+	public GetReadyScreen(ThisOrThatGame game, boolean hardcore) {
 		this.game = game;
+		this.hardcore = hardcore;
 		Gdx.input.setCatchBackKey(true);
 		back = new BackButton(game);
 		back.isMainMenu(false);
@@ -40,7 +42,7 @@ public class GetReadyScreen implements Screen {
 		
 		if(currentTime >= 120) {
 			game.random.QueueNext();
-			game.setScreen(new GameScreen(game));
+			game.setScreen(new GameScreen(game, hardcore));
 		}
 		
 		currentTime += 1;

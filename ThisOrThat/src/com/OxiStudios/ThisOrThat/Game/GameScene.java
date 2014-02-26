@@ -44,6 +44,7 @@ public class GameScene {
 	String picTwo_Name;
 	
 	int count;
+	private int checkScreenCount;
 	
 	boolean gotItRight;
 	boolean gotItWrong;
@@ -51,13 +52,14 @@ public class GameScene {
 	boolean popUp;
 	boolean startTimer;
 	boolean notTouchable;
+	boolean hardcore;
 	private ThisOrThatGame game;
 
 	private InputMultiplexer inputHandler;
+
 	
-	
-	public GameScene(ThisOrThatGame game) {
-		
+	public GameScene(ThisOrThatGame game, boolean hardcore) {
+		this.hardcore = hardcore;
 		this.game = game;
 		
 		if(game.SCREEN_WIDTH >= 1080) {
@@ -87,12 +89,13 @@ public class GameScene {
 		spriteBatch = new SpriteBatch();
 		
 		gameScore = 750.0;
+		checkScreenCount = 0;
 		
-		timer = new Timer(game, this);
+		timer = new Timer(game, this, hardcore);
 		
 		widthForTime = game.font.getBounds(Double.toString(timer.gameTimer)).width;
 		
-		retryButtonListener  = new RetryButtonListener(game, this);
+		retryButtonListener  = new RetryButtonListener(game, this, hardcore);
 		quitButtonListener   = new QuitButtonListener(game, this);
 		back                 = new BackButton(game);
 		
@@ -141,8 +144,11 @@ public class GameScene {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			game.gameScreenCount++;
-			game.setScreen(new GameScreen(game));
+			checkScreenCount++;
+			if(checkScreenCount == 1) {
+				game.gameScreenCount++;				
+			}
+			game.setScreen(new GameScreen(game, hardcore));
 		}
 		
 		
@@ -158,11 +164,13 @@ public class GameScene {
 			//check if they got a new highest right in a row
 			if(game.gameScreenCount >= game.savefile.inARow) {
 				game.savefile.inARow = game.gameScreenCount;
+				game.gameScreenCount = 0;
 			}
 			
 			//check if they got a new highscore
 			if(game.TotalScore >= game.savefile.highScore) {
 				game.savefile.highScore = game.TotalScore;
+				game.TotalScore = 0;
 			}
 			
 			//add one to total number of games played

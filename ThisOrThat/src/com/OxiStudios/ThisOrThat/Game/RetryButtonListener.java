@@ -11,8 +11,10 @@ public class RetryButtonListener implements InputProcessor{
 
 	private ThisOrThatGame game;
 	private GameScene gameScene;
-	public RetryButtonListener(ThisOrThatGame game, GameScene gameScene) {
+	private boolean hardcore;
+	public RetryButtonListener(ThisOrThatGame game, GameScene gameScene, boolean hardcore) {
 		this.game = game;
+		this.hardcore = hardcore;
 		this.gameScene = gameScene;
 	}
 
@@ -44,7 +46,7 @@ public class RetryButtonListener implements InputProcessor{
 					//stats have been updated, save the file
 					game.savefile.save();
 					game.random.QueueNext();
-					game.setScreen(new GameScreen(game));
+					game.setScreen(new GameScreen(game, hardcore));
 				}
 				
 			}
